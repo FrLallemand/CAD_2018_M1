@@ -1,0 +1,24 @@
+@startuml
+Modele -> Modele : DemandePositionTir(int joueur)
+Modele -> Strategie : ChoixPositionTir()
+Strategie --> Modele : Position p
+Modele -> Terrain : effectuerTir(numeroJoueur, p)
+Terrain -> Flotte : effectuerTir(p)
+Flotte -> Flotte : bateauPresentAPosition(p)
+Flotte --> Flotte : Optional<Bateau> option
+alt if option.isPresent()
+    Flotte -> Flotte : option.get()
+    Flotte -> Flotte : Bateau bateau
+    Flotte -> Bateau : bateau.subirTir(p)
+    Flotte -> Bateau : bateau.estDetruit()
+    Bateau --> Bateau : estDetruit
+    alt if estDetruit
+	    Flotte --> Terrain : ResultatTir.COULE
+	else
+		Flotte --> Terrain : ResultatTir.TOUCHE
+	end
+else
+	Flotte --> Terrain : ResultatTir.EAU
+end
+	Terrain --> Modele : ResultatTir
+@enduml

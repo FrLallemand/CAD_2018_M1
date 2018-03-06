@@ -1,0 +1,10 @@
+@startuml
+Modele -> Modele : notifyObservers()
+Modele -> VueJeu : update()
+VueJeu -> Modele : getTerrain()
+VueJeu --> Modele : Terrain t
+Modele --> Terrain : getEpoque()
+ --> Terrain : getEpoque()
+
+
+@enduml
