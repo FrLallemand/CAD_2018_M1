@@ -1,0 +1,36 @@
+@startuml
+
+actor Joueur
+participant "Bataille \n Navale " as BN
+
+Joueur->BN : game()
+
+create GameFactory
+BN->GameFactory : new()
+
+create Modele
+GameFactory->Modele:getNewGame
+
+BatailleNavale->Modele : run()
+
+create StrategieRandom
+Modele -> StrategieRandom : new
+
+create StrategieJoueur
+Modele -> StrategieJoueur : new
+
+Modele->Modele : demanderPlacementBateaux()
+
+Modele->StrategieRandom : placementBateaux()
+Modele<--StrategieRandom : flotte1
+
+Modele->StrategieJoueur : placementBateaux()
+Modele<--StrategieRandom : flotte2
+
+create Terrain
+Modele->Terrain : new(flotte1, flotte2)
+
+note over Modele : Boucle principale\n du jeu
+
+
+@enduml
