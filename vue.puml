@@ -2,9 +2,17 @@
 Modele -> Modele : notifyObservers()
 Modele -> VueJeu : update()
 VueJeu -> Modele : getTerrain()
-VueJeu --> Modele : Terrain t
-Modele --> Terrain : getEpoque()
- --> Terrain : getEpoque()
-
-
+Modele --> VueJeu : Terrain t
+VueJeu -> Terrain : getEpoque()
+Terrain --> VueJeu : Epoque e
+VueJeu -> Terrain : getLength()
+Terrain --> VueJeu : int length
+VueJeu -> Terrain : getWidth()
+Terrain --> VueJeu : int width
+VueJeu -> Terrain : getFlotte1()
+Terrain --> VueJeu : Flotte flotteJoueur1
+loop Bateau b in flotteJoueur1
+	 VueJeu -> Bateau : getPosition()
+	 Bateau --> VueJeu : Position p
+end
 @enduml
