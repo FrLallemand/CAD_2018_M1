@@ -4,12 +4,14 @@ import java.util.Observable;
 
 public class Modele extends Observable{
 	// Strategie des joueurs
-	private Stategie stategieJ1, strategieJ2;
+	private Stategie strategieJ1, strategieJ2;
 	private Terrain terrain;
 	
-	public Modele() {
-		
+	
+	public Modele(Terrain t) {
+		this.terrain = t;
 	}	
+	
 	public void run() {
 	}
 	
@@ -35,10 +37,9 @@ public class Modele extends Observable{
 		this.terrain = terrain;
 	}
 	public Stategie getStategieJ1() {
-		return stategieJ1;
+		return strategieJ1;
 	}
 	public void setStategieJ1(Stategie stategieJ1) {
-		this.stategieJ1 = stategieJ1;
 	}
 	public Stategie getStrategieJ2() {
 		return strategieJ2;
