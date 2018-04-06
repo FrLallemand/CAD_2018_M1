@@ -55,8 +55,18 @@ public class ChoixOptions implements Observer{
 		map_epoques.put(NomsEpoques.MODERNE.name(), new EpoqueModerne());
 		map_epoques.put(NomsEpoques.XVII.name(), new EpoqueXVII());
 		JLabel epoqueLabel = new JLabel("Époque :", SwingConstants.CENTER);
-		
 		contentPane.add(epoqueLabel);
+		
+		epoqueModerne = new JToggleButton("Moderne");
+		epoqueXVII = new JToggleButton("XVIIème siècle");
+		
+		epoques = new ButtonGroup();
+		epoques.add(epoqueModerne);
+		epoques.add(epoqueXVII);
+        JPanel p = new JPanel();
+		contentPane.add(epoqueModerne);
+		contentPane.add(epoqueXVII);
+
 		frame.pack();
 		//frame.setVisible(true);
 
