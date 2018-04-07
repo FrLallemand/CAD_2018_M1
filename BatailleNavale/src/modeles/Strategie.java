@@ -1,10 +1,12 @@
 package modeles;
 
-public class Stategie {
+public abstract class Strategie {
 	
+	public enum NomsStrategies { ALEATOIRE, CROIX};
+
 	private int numeroJoueur;
 	
-	public Stategie() {
+	public Strategie() {
 		// TODO Auto-generated constructor stub
 	}
 	

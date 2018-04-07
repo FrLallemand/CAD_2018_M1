@@ -4,7 +4,7 @@ import java.util.Observable;
 
 public class Modele extends Observable{
 	// Strategie des joueurs
-	private Stategie strategieJ1, strategieJ2;
+	private Strategie strategieJ1, strategieJ2;
 	private Terrain terrain;
 	
 	
@@ -13,6 +13,7 @@ public class Modele extends Observable{
 	}	
 	
 	public void run() {
+		System.out.println("TODO");
 	}
 	
 	public Flotte demandePlacementBateau(int numeroJoueur, Bateau bateau) {
@@ -36,15 +37,15 @@ public class Modele extends Observable{
 	public void setTerrain(Terrain terrain) {
 		this.terrain = terrain;
 	}
-	public Stategie getStategieJ1() {
+	public Strategie getStrategieJ1() {
 		return strategieJ1;
 	}
-	public void setStategieJ1(Stategie stategieJ1) {
+	public void setStrategieJ1(Strategie strategieJ1) {
 	}
-	public Stategie getStrategieJ2() {
+	public Strategie getStrategieJ2() {
 		return strategieJ2;
 	}
-	public void setStrategieJ2(Stategie strategieJ2) {
+	public void setStrategieJ2(Strategie strategieJ2) {
 		this.strategieJ2 = strategieJ2;
 	}
 

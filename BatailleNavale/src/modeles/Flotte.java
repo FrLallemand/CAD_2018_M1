@@ -7,6 +7,7 @@ import java.util.Optional;
 public class Flotte implements Iterable<Bateau>{
 
 	private List<Bateau> bateaux;
+	private Epoque epoque;
 
 	public Flotte(List<Bateau> liste_origine) {
 		this.bateaux = liste_origine;
@@ -31,6 +32,14 @@ public class Flotte implements Iterable<Bateau>{
 	public Iterator<Bateau> iterator() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Epoque getEpoque() {
+		return epoque;
+	}
+
+	public void setEpoque(Epoque epoque) {
+		this.epoque = epoque;
 	}
 
 

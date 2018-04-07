@@ -1,6 +1,6 @@
 package modeles;
 
-public class Epoque {
+public abstract class Epoque {
 	public enum NomsEpoques { XVII, MODERNE}
 
 }
