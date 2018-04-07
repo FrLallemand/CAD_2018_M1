@@ -3,20 +3,34 @@ package modeles;
 import java.util.Observable;
 
 public class Modele extends Observable{
+	public enum Joueur { J1, J2};
+	public enum GameState { ENCOURS, DEMANDEBATEAUX, FIN};
+	
 	// Strategie des joueurs
 	private Strategie strategieJ1, strategieJ2;
-	private Terrain terrain;
+	private Terrain terrainJ1, terrainJ2;
 	
+	private Joueur joueur;
+	private GameState state;
 	
-	public Modele(Terrain t) {
-		this.terrain = t;
+	public Modele(Terrain tj1, Terrain tj2) {
+		this.terrainJ1 = tj1;
+		this.terrainJ2 = tj2;
+		this.joueur = Joueur.J1;
+		this.state = GameState.DEMANDEBATEAUX;
 	}	
 	
 	public void run() {
-		System.out.println("TODO");
+		this.demandePlacementBateau(this.joueur);
 	}
+
 	
-	public Flotte demandePlacementBateau(int numeroJoueur, Bateau bateau) {
+	public Flotte demandePlacementBateau(Joueur j) {
+		if(j == Joueur.J1 && state == GameState.DEMANDEBATEAUX) {
+			this.setChanged();
+			this.notifyObservers();
+			System.out.println("TODO : placement des bateaux");
+		}
 		//TODO
 		return null;		
 	}
@@ -31,12 +45,22 @@ public class Modele extends Observable{
 		return null;		
 	}
 	
-	public Terrain getTerrain() {
-		return terrain;
+	public Terrain getTerrainJ1() {
+		return terrainJ1;
 	}
-	public void setTerrain(Terrain terrain) {
-		this.terrain = terrain;
+
+	public Terrain getTerrainJ2() {
+		return terrainJ1;
 	}
+
+	public void setTerrainJ1(Terrain terrain) {
+		this.terrainJ1 = terrain;
+	}
+
+	public void setTerrainJ2(Terrain terrain) {
+		this.terrainJ2 = terrain;
+	}
+	
 	public Strategie getStrategieJ1() {
 		return strategieJ1;
 	}
@@ -47,6 +71,22 @@ public class Modele extends Observable{
 	}
 	public void setStrategieJ2(Strategie strategieJ2) {
 		this.strategieJ2 = strategieJ2;
+	}
+	
+	public Joueur getJoueur() {
+		return joueur;
+	}
+	
+	public void setJoueur(Joueur joueur) {
+		this.joueur = joueur;
+	}
+	
+	public GameState getState() {
+		return state;
+	}
+	
+	public void setState(GameState state) {
+		this.state = state;
 	}
 
 }

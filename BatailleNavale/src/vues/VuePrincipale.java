@@ -23,6 +23,8 @@ import javax.swing.SwingConstants;
 
 import modeles.BatailleNavale;
 import modeles.Modele;
+import modeles.Modele.GameState;
+import modeles.Modele.Joueur;
 
 public class VuePrincipale extends JPanel implements Observer{
 
@@ -42,7 +44,7 @@ public class VuePrincipale extends JPanel implements Observer{
 
 	public VuePrincipale(Modele m){
 		this.modele = m;
-
+		this.modele.addObserver(this);
 		//init JFrame
 		JFrame affichage = new JFrame("Bataille Navale");
 		affichage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +57,7 @@ public class VuePrincipale extends JPanel implements Observer{
 
         constraints.insets = new Insets(25, 25, 25, 25);
         
-		terrainJoueur = new VueTerrain(modele.getTerrain());		
+		terrainJoueur = new VueTerrain(modele.getTerrainJ1());		
         constraints.fill = GridBagConstraints.VERTICAL;
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -67,7 +69,7 @@ public class VuePrincipale extends JPanel implements Observer{
         constraints.gridy = 1;
         this.add(separator, constraints);
 
-		terrainTir = new VueTerrain(modele.getTerrain());		
+		terrainTir = new VueTerrain(modele.getTerrainJ1());		
         constraints.gridx = 2;
         constraints.gridy = 1;
         this.add(terrainTir, constraints);
@@ -104,8 +106,10 @@ public class VuePrincipale extends JPanel implements Observer{
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		if(this.modele.getState() == GameState.DEMANDEBATEAUX && this.modele.getJoueur() == Joueur.J1) {
+			// Demande de bateaux sur l'interface, puis passer au controleur
+		}
 		// TODO Auto-generated method stub
-
 	}
 
 }

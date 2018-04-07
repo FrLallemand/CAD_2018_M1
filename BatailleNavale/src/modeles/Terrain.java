@@ -20,9 +20,9 @@ public class Terrain {
 		this.height = height;
 	}
 
-	public Terrain(Flotte flJ1, Flotte flJ2) {
-		this.setFlotteJ1(flJ1);
-		this.setFlotteJ2(flJ2);		
+	public Terrain(Flotte flJ1) {
+		this.setFlotte(flJ1);
+		//this.setFlotteJ2(flJ2);		
 		this.width = 10;
 		this.height = 10;
 	}
@@ -39,11 +39,11 @@ public class Terrain {
 		this.flotteJ2 = flotteJ2;
 	}
 
-	public Flotte getFlotteJ1() {
+	public Flotte getFlotte() {
 		return flotteJ1;
 	}
 
-	public void setFlotteJ1(Flotte flotteJ1) {
+	public void setFlotte(Flotte flotteJ1) {
 		this.flotteJ1 = flotteJ1;
 	}
 

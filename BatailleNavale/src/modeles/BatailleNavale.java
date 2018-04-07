@@ -24,9 +24,7 @@ public class BatailleNavale extends Observable{
 		this.modele = factory.getNewGame(epoque, modeTir, strategieJ1, strategieJ2);
 		
 		VuePrincipale vt=new VuePrincipale(this.modele);
-		this.modele.addObserver(vt);
-		
-		//this.modele.run();		
+		this.modele.run();		
 	}
 	
 }

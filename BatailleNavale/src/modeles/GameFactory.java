@@ -38,8 +38,9 @@ public class GameFactory {
 		flJ1.setEpoque(e);
 		Flotte flJ2 = new Flotte(new ArrayList<Bateau>());
 		flJ2.setEpoque(e);
-		Terrain t = new Terrain(flJ1, flJ2);
-		Modele modele = new Modele(t);
+		Terrain tj1 = new Terrain(flJ1);
+		Terrain tj2 = new Terrain(flJ2);
+		Modele modele = new Modele(tj1, tj2);
 		modele.setStrategieJ1(new StrategieJoueur());
 		modele.setStrategieJ2(sJ2);
 		return modele;
