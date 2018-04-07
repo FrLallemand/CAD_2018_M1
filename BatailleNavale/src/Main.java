@@ -1,5 +1,6 @@
 import modeles.BatailleNavale;
 import vues.ChoixOptions;
+import vues.VueTerrain;
 
 public class Main {
 
@@ -9,6 +10,9 @@ public class Main {
 		bn.addObserver(choixOptions);
 		choixOptions.visible();
 		//bn.game();
+		
+		//VueTerrain vt=new VueTerrain();
+		
 	}
 
 }
