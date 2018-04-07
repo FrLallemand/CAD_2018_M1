@@ -2,114 +2,63 @@ package vues;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
-import modeles.BatailleNavale;
-import modeles.Modele;
+import modeles.Terrain;
 
-public class VueTerrain  implements Observer{
+public class VueTerrain extends JPanel implements Observer{
 
-	private JFrame affichage;
-	private JPanel playerView;
-	private JPanel playerViewTerrain;
-	private JPanel ennemyView;
-	private JPanel ennemyViewTerrain;
-	private JPanel optionInfoTop;
-	private ButtonGroup orientation;
-	private JButton nouveau;
-	private JButton sauvegarder;
-	private JButton charger;
-	private Modele modele;
+ 	protected static final char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+	
+ 	/**
+	 * la taille des cases
+	 */
+	protected static final int WIDTH = 25;
+	protected static final int HEIGHT = 25;
 
-
-
-
-	public VueTerrain(Modele m){
-		this.modele = m;
-		//init JFrame
-		affichage=new JFrame("Bataille Navale");
-		affichage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		affichage.setLayout(new BorderLayout());
-		affichage.setSize(1000, 600);
-		Container contaff=affichage.getContentPane();
-		//affichage partie joueur 1(joueur humain)
-		playerView=new JPanel();
-		playerView.setLayout(new BorderLayout());
-		playerView.add(new JLabel("Joueur 1",SwingConstants.CENTER),BorderLayout.NORTH);
-		playerViewTerrain=new JPanel();
-		playerViewTerrain.setLayout(new GridLayout(11,11));
-		this.fillGrid(playerViewTerrain,true);
-		playerView.add(playerViewTerrain,BorderLayout.CENTER);
-		contaff.add(playerView,BorderLayout.WEST);
-		//affichage partie joueur 2(joueur IA)
-		ennemyView=new JPanel();
-		ennemyView.setLayout(new BorderLayout());
-		ennemyView.add(new JLabel("Joueur 2",SwingConstants.CENTER),BorderLayout.NORTH);
-		ennemyViewTerrain=new JPanel();
-		ennemyViewTerrain.setLayout(new GridLayout(11,11));
-		this.fillGrid(ennemyViewTerrain,false);
-		ennemyView.add(ennemyViewTerrain,BorderLayout.CENTER);
-		contaff.add(ennemyView,BorderLayout.EAST);
-		//affichage menu/option/information suppl�mentaires
-		optionInfoTop=new JPanel();
-		//selection orientation lors du placement des bateaux
-		optionInfoTop.add(new JLabel("Orientation :"));
-		orientation = new ButtonGroup();
-		JRadioButton H= new JRadioButton("Horizontal",true);
-		JRadioButton V= new JRadioButton("Vertical");
-		orientation.add(V);
-		orientation.add(H);
-		optionInfoTop.add(H);
-		optionInfoTop.add(V);
-		//partie menu
-		nouveau=new JButton("Nouveau");
-		sauvegarder=new JButton("Sauvegarder");
-		charger=new JButton("Charger");
-		optionInfoTop.add(nouveau);
-		optionInfoTop.add(sauvegarder);
-		optionInfoTop.add(charger);
-		contaff.add(optionInfoTop,BorderLayout.NORTH);
-		affichage.setVisible(true);
+	private int decalage = 1;
+	private Terrain terrain;
+	
+	public VueTerrain(Terrain t) {
+		terrain = t;
+		this.setLayout(new GridLayout(t.getHeight()+decalage, t.getWidth()+decalage));
+		this.setPreferredSize(new Dimension((t.getHeight()+decalage)*HEIGHT,(t.getHeight()+decalage)*WIDTH));
+		this.initialize();
+		this.setVisible(true);
 	}
-
-	// Remplis la grille de chaque joueurs
-	private void fillGrid(JPanel vue, boolean isplayerView){
-		String[] lettres={"A","B","C","D","E","F","G","H","I","J"};
-		JButton temp;
-		vue.add(new JLabel(" ",SwingConstants.CENTER));
-		for(int x=1;x<11;x++){
-			vue.add(new JLabel(""+x,SwingConstants.CENTER));
+	
+	
+	public void initialize() {
+		this.add(new JLabel("",SwingConstants.CENTER));
+		for(int w=1;w<terrain.getWidth()+1;w++){
+			this.add(new JLabel(String.valueOf(w),SwingConstants.CENTER));		
 		}
-
-		for(int x=0;x<10;x++){
-			vue.add(new JLabel(lettres[x],SwingConstants.CENTER));
-			for(int y=0;y<10;y++){
-				temp=new JButton();
-				temp.setBackground(Color.BLUE);
-				temp.setEnabled(false);
-				vue.add(temp);
+		System.out.println(terrain.getHeight()+decalage);
+		for(int w=0;w<terrain.getWidth();w++){
+			this.add(new JLabel(String.valueOf(alphabet[w]),SwingConstants.CENTER));
+			for(int h=0;h<terrain.getHeight();h++){
+				JButton tmp = new JButton();
+				tmp.setBackground(Color.BLUE);
+				this.add(tmp);
 			}
 		}
 	}
-
+	
 	@Override
-	public void update(Observable arg0, Object arg1) {
+	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

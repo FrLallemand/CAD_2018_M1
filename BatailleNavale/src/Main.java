@@ -1,6 +1,6 @@
 import modeles.BatailleNavale;
 import vues.ChoixOptions;
-import vues.VueTerrain;
+import vues.VuePrincipale;
 
 public class Main {
 
