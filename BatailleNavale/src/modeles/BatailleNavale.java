@@ -5,9 +5,10 @@ import java.util.Observable;
 import modeles.Epoque.NomsEpoques;
 import modeles.Strategie.NomsStrategies;
 import vues.ChoixOptions;
+import vues.VueTerrain;
 
 public class BatailleNavale extends Observable{
-	Modele modele;
+	private Modele modele;
 	
 	public BatailleNavale() {
 		
@@ -19,7 +20,9 @@ public class BatailleNavale extends Observable{
 		int strategieJ1 = 0;
 		// TODO gui (vue) pour le choix des époques, mode de tir, strategie.
 		this.modele = factory.getNewGame(epoque, modeTir, strategieJ1, strategieJ2);
-		this.modele.run();
+		VueTerrain vt=new VueTerrain(this.modele);
+		this.modele.addObserver(vt);
+		//this.modele.run();
 		
 	}
 	

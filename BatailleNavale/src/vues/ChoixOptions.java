@@ -48,7 +48,7 @@ public class ChoixOptions implements Observer{
 	private Map<String,NomsStrategies> map_strategies;
 
 	private JFrame frame = new JFrame("Options");
-	BatailleNavale modele;
+	private BatailleNavale modele;
 
     public ChoixOptions(BatailleNavale m) {
 		this.modele = m;

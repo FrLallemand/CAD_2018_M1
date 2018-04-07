@@ -18,6 +18,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import modeles.BatailleNavale;
+import modeles.Modele;
+
 public class VueTerrain  implements Observer{
 
 	private JFrame affichage;
@@ -30,11 +33,13 @@ public class VueTerrain  implements Observer{
 	private JButton nouveau;
 	private JButton sauvegarder;
 	private JButton charger;
-	
+	private Modele modele;
 
 
 
-	public VueTerrain(){
+
+	public VueTerrain(Modele m){
+		this.modele = m;
 		//init JFrame
 		affichage=new JFrame("Bataille Navale");
 		affichage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,7 +64,7 @@ public class VueTerrain  implements Observer{
 		this.fillGrid(ennemyViewTerrain,false);
 		ennemyView.add(ennemyViewTerrain,BorderLayout.CENTER);
 		contaff.add(ennemyView,BorderLayout.EAST);
-		//affichage menu/option/information supplémentaires
+		//affichage menu/option/information supplï¿½mentaires
 		optionInfoTop=new JPanel();
 		//selection orientation lors du placement des bateaux
 		optionInfoTop.add(new JLabel("Orientation :"));
