@@ -44,7 +44,6 @@ public class VueTerrain extends JPanel implements Observer{
 		for(int w=1;w<terrain.getWidth()+1;w++){
 			this.add(new JLabel(String.valueOf(w),SwingConstants.CENTER));		
 		}
-		System.out.println(terrain.getHeight()+decalage);
 		for(int w=0;w<terrain.getWidth();w++){
 			this.add(new JLabel(String.valueOf(alphabet[w]),SwingConstants.CENTER));
 			for(int h=0;h<terrain.getHeight();h++){
