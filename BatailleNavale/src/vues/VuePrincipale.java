@@ -21,6 +21,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import Controleurs.PlacementControleur;
 import modeles.BatailleNavale;
 import modeles.Modele;
 import modeles.Modele.GameState;
@@ -37,8 +38,9 @@ public class VuePrincipale extends JPanel implements Observer{
 	private ButtonGroup orientation;
 	private JButton nouveau;
 	private JButton sauvegarder;
-	private JButton charger;
-	
+	private JButton charger;	
+	private JButton placementAleatoire;
+
 	private Modele modele;
 	private VueTerrain terrainJoueur, terrainTir;
 
@@ -50,7 +52,7 @@ public class VuePrincipale extends JPanel implements Observer{
 		affichage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		affichage.setContentPane(this);
 		affichage.setVisible(true);
-		affichage.setSize(800, 400);
+		affichage.setSize(900, 500);
 
 		this.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -73,6 +75,12 @@ public class VuePrincipale extends JPanel implements Observer{
         constraints.gridx = 2;
         constraints.gridy = 1;
         this.add(terrainTir, constraints);
+
+		placementAleatoire=new JButton("Placement aléatoire");
+		placementAleatoire.addActionListener(new PlacementControleur(this.modele));
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        this.add(placementAleatoire, constraints);
 
         this.setVisible(true);
         		
@@ -104,12 +112,32 @@ public class VuePrincipale extends JPanel implements Observer{
 		
 	}
 	
+	public void disablePlacementAleatoire() {
+		this.placementAleatoire.setEnabled(false);
+		this.placementAleatoire.setVisible(false);
+	}
+
+	public void enablePlacementAleatoire() {
+		this.placementAleatoire.setEnabled(true);
+		this.placementAleatoire.setVisible(true);
+	}
+
+	public void demandePlacementBateaux() {
+		this.enablePlacementAleatoire();
+	}
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(this.modele.getState() == GameState.DEMANDEBATEAUX && this.modele.getJoueur() == Joueur.J1) {
+			this.terrainJoueur.demandePlacementBateaux();
 			// Demande de bateaux sur l'interface, puis passer au controleur
 		}
-		// TODO Auto-generated method stub
+		if(this.modele.getState() == GameState.ENCOURS && this.modele.getJoueur() == Joueur.J1) {
+			// affichage des bateaux
+			this.disablePlacementAleatoire();
+			this.terrainJoueur.update();
+			System.out.println("lpop");
+		}
 	}
 
 }

@@ -2,6 +2,8 @@ package modeles;
 
 import java.util.Observable;
 
+import modeles.bateaux.Bateau;
+
 public class Modele extends Observable{
 	public enum Joueur { J1, J2};
 	public enum GameState { ENCOURS, DEMANDEBATEAUX, FIN};
@@ -29,12 +31,20 @@ public class Modele extends Observable{
 		if(j == Joueur.J1 && state == GameState.DEMANDEBATEAUX) {
 			this.setChanged();
 			this.notifyObservers();
-			System.out.println("TODO : placement des bateaux");
+			//System.out.println("TODO : placement des bateaux");
 		}
 		//TODO
 		return null;		
 	}
+		
+	public void placementAleatoire() {
+		this.terrainJ1.placementFlotteHasard();
+		state = GameState.ENCOURS;
+		this.setChanged();
+		this.notifyObservers();
 
+	}
+	
 	public Bateau demandeChoixBateau(int numeroJoueur) {
 		//TODO
 		return null;		

@@ -4,8 +4,8 @@ import java.util.Observable;
 
 import javax.swing.JFrame;
 
-import modeles.Epoque.NomsEpoques;
 import modeles.Strategie.NomsStrategies;
+import modeles.epoques.Epoque.NomsEpoques;
 import vues.ChoixOptions;
 import vues.VuePrincipale;
 

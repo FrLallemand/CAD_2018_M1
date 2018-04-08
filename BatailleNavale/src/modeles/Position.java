@@ -3,26 +3,27 @@ package modeles;
 public class Position {
 	private int X;
 	private int Y;
-	private boolean direction;
-	
+	public Direction direction;
+	public enum Direction { HORIZONTAL, VERTICAL};
+
 	public Position() {
 		this.setX(0);
 		this.setY(0);
-		this.setDirection(false);
+		this.setDirection(Direction.HORIZONTAL);
 	}
 
-	public Position(int x, int y, Boolean dir) {
+	public Position(int x, int y, Direction dir) {
 		this.setX(x);
 		this.setY(y);
-		this.setDirection(dir);
+		this.direction = dir;
 	}
 
-	public boolean isDirection() {
+	public Direction getDirection() {
 		return direction;
 	}
 
-	public void setDirection(boolean direction) {
-		this.direction = direction;
+	public void setDirection(Direction d) {
+		this.direction = d;
 	}
 
 	public int getX() {

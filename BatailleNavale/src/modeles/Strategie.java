@@ -1,5 +1,7 @@
 package modeles;
 
+import modeles.bateaux.Bateau;
+
 public abstract class Strategie {
 	
 	public enum NomsStrategies { ALEATOIRE, CROIX};

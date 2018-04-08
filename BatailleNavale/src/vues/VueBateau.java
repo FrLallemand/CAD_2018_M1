@@ -3,7 +3,7 @@ package vues;
 import java.util.Observable;
 import java.util.Observer;
 
-import modeles.Bateau;
+import modeles.bateaux.Bateau;
 
 public class VueBateau implements Observer{
 	

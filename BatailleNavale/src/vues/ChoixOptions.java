@@ -23,14 +23,14 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 import modeles.BatailleNavale;
-import modeles.Epoque;
-import modeles.EpoqueModerne;
-import modeles.EpoqueXVII;
 import modeles.Strategie;
 import modeles.Strategie.NomsStrategies;
+import modeles.epoques.Epoque;
+import modeles.epoques.EpoqueModerne;
+import modeles.epoques.EpoqueXVII;
+import modeles.epoques.Epoque.NomsEpoques;
 import modeles.StrategieAleatoire;
 import modeles.StrategieCroix;
-import modeles.Epoque.NomsEpoques;
 
 public class ChoixOptions implements Observer{
 
@@ -78,7 +78,7 @@ public class ChoixOptions implements Observer{
 		epoqueModerne.setSelected(true);
 		epoqueModerne.setActionCommand(NomsEpoques.MODERNE.name());
 		epoqueXVII = new JToggleButton("XVIIème siècle");		
-		epoqueModerne.setActionCommand(NomsEpoques.XVII.name());
+		epoqueXVII.setActionCommand(NomsEpoques.XVII.name());
 		epoques = new ButtonGroup();
 		epoques.add(epoqueModerne);
 		epoques.add(epoqueXVII);
@@ -140,6 +140,7 @@ public class ChoixOptions implements Observer{
     	@Override
         public void actionPerformed(ActionEvent e) {
     		frame.dispose();
+    		//System.out.println(epoques.getSelection().getActionCommand());
     		modele.game(getEpoque(), getStrategie());
         }
     }
