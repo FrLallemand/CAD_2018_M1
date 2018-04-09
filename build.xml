@@ -16,6 +16,7 @@
   <target name="init">
     <mkdir dir="${build}"/>
     <mkdir dir="${jar}"/>
+    <mkdir dir="${lib}"/>
   </target>
 
   <target name="compile" depends="init" description="Compiler le projet">
