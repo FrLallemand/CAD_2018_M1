@@ -8,12 +8,13 @@ public abstract class Strategie {
 	public enum NomsStrategies { ALEATOIRE, CROIX };
 
 	private int numeroJoueur;
+	private Terrain terrain;
 	
-	public Strategie() {
-		// TODO Auto-generated constructor stub
+	public Strategie(Terrain t) {
+		this.terrain = t;
 	}
 	
-	public abstract void placementBateaux(Terrain t);
+	public abstract void placementBateaux();
 	public abstract Bateau choixBateauTir();	
 	public abstract Position choixPositionTir();
 }

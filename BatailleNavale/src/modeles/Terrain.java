@@ -11,6 +11,7 @@ public class Terrain {
 	private int width, height;
 	public enum StatusCase{EAU, BATEAU, EAUTOUCHE, BATEAUTOUCHE};
 	private StatusCase cases[][];
+	Random rand;
 			
 	public StatusCase[][] getCases() {
 		return cases;
@@ -45,6 +46,8 @@ public class Terrain {
 		for(int i=0; i<width; i++)
 			for(int j=0; j<height; j++)
 				cases[i][j] = StatusCase.EAU;
+
+		this.rand = new Random();
 	}
 	
 	public void effectuerTir(int numeroJoueur, Position position) {
@@ -72,7 +75,6 @@ public class Terrain {
 	}
 
 	public void placementFlotteHasard() {
-		Random rand = new Random();
 		while(!flotteJ1.placementFini()) {
 			Bateau b = flotteJ1.bateauSuivantAPlacer();
 			boolean placementValide = false;

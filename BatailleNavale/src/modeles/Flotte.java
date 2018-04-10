@@ -26,6 +26,7 @@ public class Flotte implements Iterable<Bateau>{
 		//bateauxAPlacer = bateaux.size();
 	}
 
+	// probablement inutile
 	public boolean testerTir(Position position) {
 		// TODO Auto-generated method stub
 		return false;
@@ -48,13 +49,18 @@ public class Flotte implements Iterable<Bateau>{
 	}
 
 	
-	public boolean estDetruit() {
-		// TODO Auto-generated method stub
+	public boolean estDetruit(Bateau b) {
+		foreach()
 		return false;
 	}
 
-	public Boolean flotteDetruite() {
-		// TODO
+	public boolean flotteDetruite() {
+		foreach(Bateau b : this.bateaux){
+			if(!b.estDetruit()){
+				return false;
+			}
+		}
+
 		return true;
 	}
 

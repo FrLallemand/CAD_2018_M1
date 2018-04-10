@@ -12,6 +12,12 @@ public class Position {
 		this.setDirection(Direction.HORIZONTAL);
 	}
 
+	public Position(int x, int y){
+		this.setX(x);
+		this.setY(y);
+		this.direction = Direction.HORIZONTAL;
+	}
+
 	public Position(int x, int y, Direction dir) {
 		this.setX(x);
 		this.setY(y);
