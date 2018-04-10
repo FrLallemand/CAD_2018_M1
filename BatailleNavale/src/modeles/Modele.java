@@ -64,7 +64,7 @@ public class Modele extends Observable{
 	}
 
 	public Terrain getTerrainJ2() {
-		return terrainJ1;
+		return terrainJ2;
 	}
 
 	public void setTerrainJ1(Terrain terrain) {
