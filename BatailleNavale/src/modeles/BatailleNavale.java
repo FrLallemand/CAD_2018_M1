@@ -23,8 +23,8 @@ public class BatailleNavale extends Observable{
 		// TODO gui (vue) pour le choix des époques, mode de tir, strategie.
 		this.modele = factory.getNewGame(epoque, modeTir, strategieJ1, strategieJ2);
 		
-		VuePrincipale vt=new VuePrincipale(this.modele);
-		this.modele.run();		
+		VuePrincipale vt = new VuePrincipale(this.modele);
+		this.modele.run();	
 	}
 	
 }

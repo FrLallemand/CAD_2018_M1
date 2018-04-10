@@ -1,10 +1,11 @@
 package modeles;
 
 import modeles.bateaux.Bateau;
+import modeles.Terrain;
 
 public abstract class Strategie {
 	
-	public enum NomsStrategies { ALEATOIRE, CROIX};
+	public enum NomsStrategies { ALEATOIRE, CROIX };
 
 	private int numeroJoueur;
 	
@@ -12,18 +13,7 @@ public abstract class Strategie {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void placementBateaux() {
-		
-	}
-	
-	public Bateau choixBateauTir() {
-		//TODO
-		return null;
-	}
-	
-	public Position choixPositionTir() {
-		//TODO
-		return null;
-	}
-
+	public abstract void placementBateaux(Terrain t);
+	public abstract Bateau choixBateauTir();	
+	public abstract Position choixPositionTir();
 }

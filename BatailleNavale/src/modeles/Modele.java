@@ -5,11 +5,11 @@ import java.util.Observable;
 import modeles.bateaux.Bateau;
 
 public class Modele extends Observable{
-	public enum Joueur { J1, J2};
+	public enum Joueur {J1, J2};
 	public enum GameState { ENCOURS, DEMANDEBATEAUX, FIN};
 	
 	// Strategie des joueurs
-	private Strategie strategieJ1, strategieJ2;
+	private Strategie strategieJ2;
 	private Terrain terrainJ1, terrainJ2;
 	
 	private Joueur joueur;
@@ -23,18 +23,22 @@ public class Modele extends Observable{
 	}	
 	
 	public void run() {
-		this.demandePlacementBateau(this.joueur);
+		this.demandePlacementBateau(Joueur.J1);
+		this.demandePlacementBateau(Joueur.J2);
+		this.state = GameState.ENCOURS;
 	}
 
 	
-	public Flotte demandePlacementBateau(Joueur j) {
+	public void demandePlacementBateau(Joueur j) {
 		if(j == Joueur.J1 && state == GameState.DEMANDEBATEAUX) {
 			this.setChanged();
 			this.notifyObservers();
-			//System.out.println("TODO : placement des bateaux");
 		}
-		//TODO
-		return null;		
+		if(j == Joueur.J2 && state == GameState.DEMANDEBATEAUX) {
+			this.strategieJ2.placementBateaux(this.terrainJ2);
+			this.setChanged();
+			this.notifyObservers();
+		}
 	}
 		
 	public void placementAleatoire() {
@@ -71,11 +75,6 @@ public class Modele extends Observable{
 		this.terrainJ2 = terrain;
 	}
 	
-	public Strategie getStrategieJ1() {
-		return strategieJ1;
-	}
-	public void setStrategieJ1(Strategie strategieJ1) {
-	}
 	public Strategie getStrategieJ2() {
 		return strategieJ2;
 	}

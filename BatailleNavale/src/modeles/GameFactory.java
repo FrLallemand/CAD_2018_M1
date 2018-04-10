@@ -44,7 +44,6 @@ public class GameFactory {
 		Terrain tj1 = new Terrain(flJ1);
 		Terrain tj2 = new Terrain(flJ2);
 		Modele modele = new Modele(tj1, tj2);
-		modele.setStrategieJ1(new StrategieJoueur());
 		modele.setStrategieJ2(sJ2);
 		return modele;
 	}
