@@ -59,6 +59,8 @@ public class Modele extends Observable{
 		return null;		
 	}
 	
+	//public void 
+	
 	public Terrain getTerrainJ1() {
 		return terrainJ1;
 	}

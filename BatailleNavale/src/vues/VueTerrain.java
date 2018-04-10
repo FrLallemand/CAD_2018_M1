@@ -20,7 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import Controleurs.TirControleur;
 import modeles.Terrain;
+import modeles.Modele;
 import modeles.Strategie.NomsStrategies;
 import modeles.Terrain.StatusCase;
 import modeles.epoques.Epoque.NomsEpoques;
@@ -37,14 +39,20 @@ public class VueTerrain extends JPanel {
 	protected static final Color SEA = Color.BLUE;
 
 	private int decalage = 1;
+	private Modele modele;
 	private Terrain terrain;
 	private JButton[][] tiles;
 	
-	public VueTerrain(Terrain t) {
-		terrain = t;
-		this.setLayout(new GridLayout(t.getHeight()+decalage, t.getWidth()+decalage));
-		this.setPreferredSize(new Dimension((t.getHeight()+decalage)*HEIGHT,(t.getHeight()+decalage)*WIDTH));
-		this.tiles = new JButton[t.getHeight()][t.getWidth()];
+	public VueTerrain(Modele m, boolean estTerrainTir) {
+		modele = m;
+		if(estTerrainTir) {			
+			terrain = m.getTerrainJ2();
+		} else {
+			terrain = m.getTerrainJ1();
+		}
+		this.setLayout(new GridLayout(terrain.getHeight()+decalage, terrain.getWidth()+decalage));
+		this.setPreferredSize(new Dimension((terrain.getHeight()+decalage)*HEIGHT,(terrain.getHeight()+decalage)*WIDTH));
+		this.tiles = new JButton[terrain.getHeight()][terrain.getWidth()];
 		this.initialize();
 		this.setVisible(true);
 	}
@@ -71,6 +79,7 @@ public class VueTerrain extends JPanel {
 		for(int w=0;w<terrain.getWidth();w++){
 			for(int h=0;h<terrain.getHeight();h++){
 				tiles[w][h].setEnabled(true);
+				tiles[w][h].addActionListener(new TirControleur(modele, w, h));
 			}
 		}
 	}

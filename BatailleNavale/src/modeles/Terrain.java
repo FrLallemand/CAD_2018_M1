@@ -51,6 +51,10 @@ public class Terrain {
 		
 	}
 
+	public boolean testerTir(int numeroJoueur, Position position) {
+		return false;
+	}
+
 	public Flotte getFlotteJ2() {
 		return flotteJ2;
 	}
