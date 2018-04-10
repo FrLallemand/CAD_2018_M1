@@ -80,6 +80,16 @@ public class Flotte implements Iterable<Bateau>{
 		return ResultatTir.EAU;
 	}
 
+	public Bateau getBateau(Position p) {
+		for(Bateau b : this.bateaux) {
+			if(b.testerTir(p)) {
+				return b;
+			}
+		}
+		
+		return null;
+	}
+	
 	public Optional<Bateau> bateauPresentAPosition(Position position){
 		// TODO
 		return Optional.empty();		
