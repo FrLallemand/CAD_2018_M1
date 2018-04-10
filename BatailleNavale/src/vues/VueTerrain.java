@@ -59,6 +59,7 @@ public class VueTerrain extends JPanel {
 			this.add(new JLabel(String.valueOf(alphabet[w]),SwingConstants.CENTER));
 			for(int h=0;h<terrain.getHeight();h++){
 				JButton tmp = new JButton();
+				tmp.setEnabled(false);
 				tmp.setBackground(Color.BLUE);
 				this.add(tmp);
 				tiles[w][h] = tmp;
@@ -66,6 +67,13 @@ public class VueTerrain extends JPanel {
 		}
 	}
 	
+	public void activeTerrain() {
+		for(int w=0;w<terrain.getWidth();w++){
+			for(int h=0;h<terrain.getHeight();h++){
+				tiles[w][h].setEnabled(true);
+			}
+		}
+	}
 
 	public void update() {
 		for(int w=0;w<terrain.getWidth();w++){

@@ -59,6 +59,7 @@ public class VuePrincipale extends JPanel implements Observer{
 
         constraints.insets = new Insets(25, 25, 25, 25);
         
+        // Terrain affichant les bateaux du joueur
 		terrainJoueur = new VueTerrain(modele.getTerrainJ1());		
         constraints.fill = GridBagConstraints.VERTICAL;
         constraints.gridx = 0;
@@ -71,7 +72,8 @@ public class VuePrincipale extends JPanel implements Observer{
         constraints.gridy = 1;
         this.add(separator, constraints);
 
-		terrainTir = new VueTerrain(modele.getTerrainJ1());		
+        // Terrain affichant les tirs fait par le joueur
+		terrainTir = new VueTerrain(modele.getTerrainJ2());		
         constraints.gridx = 2;
         constraints.gridy = 1;
         this.add(terrainTir, constraints);
@@ -135,8 +137,8 @@ public class VuePrincipale extends JPanel implements Observer{
 		if(this.modele.getState() == GameState.ENCOURS && this.modele.getJoueur() == Joueur.J1) {
 			// affichage des bateaux
 			this.disablePlacementAleatoire();
+			this.terrainTir.activeTerrain();
 			this.terrainJoueur.update();
-			System.out.println("lpop");
 		}
 	}
 
