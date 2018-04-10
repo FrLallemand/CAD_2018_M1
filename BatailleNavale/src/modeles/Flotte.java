@@ -68,7 +68,12 @@ public class Flotte implements Iterable<Bateau>{
 		for(Bateau b : this.bateaux) {
 			if(b.testerTir(tir)) {
 				b.effectuerTir(tir);
-				return ResultatTir.TOUCHE;
+				if(b.estDetruit()) {
+					return ResultatTir.COULE;
+				}
+				else {
+					return ResultatTir.TOUCHE;
+				}
 			}
 		}
 		

@@ -9,7 +9,7 @@ import modeles.bateaux.Bateau;
 public class Terrain {
 	private Flotte flotte;
 	private int width, height;
-	public enum StatusCase{EAU, BATEAU, EAUTOUCHE, BATEAUTOUCHE};
+	public enum StatusCase{EAU, COULE, BATEAU, EAUTOUCHE, BATEAUTOUCHE};
 	private StatusCase cases[][];
 	Random rand;
 			
@@ -58,6 +58,9 @@ public class Terrain {
 				break;
 			case EAU:
 				cases[position.getX()][position.getY()] = StatusCase.EAUTOUCHE;				
+				break;
+			case COULE:
+				cases[position.getX()][position.getY()] = StatusCase.COULE;
 				break;
 			default:
 				break;

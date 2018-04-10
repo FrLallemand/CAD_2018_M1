@@ -102,7 +102,18 @@ public class Modele extends Observable{
 	public void setState(GameState state) {
 		this.state = state;
 	}
-
+	
+	public Joueur getJoueurGagnant() {
+		if(this.terrainJ1.getFlotte().flotteDetruite()) {
+			return this.joueur.J2;
+		}
+		else if(this.terrainJ2.getFlotte().flotteDetruite()) {
+			return this.joueur.J1;
+		}
+		
+		return this.joueur.J1;
+	}
+	
 	public void effectuerTir(Position p) {
 		if(this.joueur == Joueur.J1 && this.state != GameState.FIN) {	
 			if(this.terrainJ2.effectuerTir(p)) {
