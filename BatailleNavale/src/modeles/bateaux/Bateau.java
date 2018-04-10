@@ -3,6 +3,7 @@ package modeles.bateaux;
 import java.util.Collection;
 
 import modeles.Position;
+import modeles.bateaux.Bateau;
 
 public abstract class Bateau {
 	private String nom;
@@ -26,6 +27,14 @@ public abstract class Bateau {
 	}
 	public void setTaille(int taille) {
 		this.taille = taille;
-	}	
+	}
 
+	public Position getPosition(){
+		return this.position;
+	}
+
+	public boolean equals(Object o){
+		Bateau b = (Bateau) o;
+		return (b.getPosition().getX() == this.getPosition().getX() && b.getPosition().getY() == this.getPosition().getY());
+ 	}
 }
