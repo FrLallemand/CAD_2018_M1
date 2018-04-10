@@ -42,10 +42,12 @@ public class VueTerrain extends JPanel {
 	private Modele modele;
 	private Terrain terrain;
 	private JButton[][] tiles;
+	private boolean estTerrainTir;
 	
-	public VueTerrain(Modele m, boolean estTerrainTir) {
+	public VueTerrain(Modele m, boolean terrainTir) {
 		modele = m;
-		if(estTerrainTir) {			
+		estTerrainTir = terrainTir;
+		if(terrainTir) {			
 			terrain = m.getTerrainJ2();
 		} else {
 			terrain = m.getTerrainJ1();
@@ -100,7 +102,11 @@ public class VueTerrain extends JPanel {
 				JButton tmp = tiles[w][h];
 				switch (cases[w][h]) {
 				case BATEAU:
-					tmp.setBackground(Color.GREEN);
+					if(this.estTerrainTir) {	
+						tmp.setBackground(Color.BLUE);
+					} else {
+						tmp.setBackground(Color.GREEN);						
+					}
 					break;
 				case EAU:
 					tmp.setBackground(Color.BLUE);
@@ -110,6 +116,9 @@ public class VueTerrain extends JPanel {
 					break;
 				case EAUTOUCHE:
 					tmp.setBackground(Color.CYAN);
+					break;
+				case COULE:
+					tmp.setBackground(Color.BLACK);
 					break;
 				default:
 					break;

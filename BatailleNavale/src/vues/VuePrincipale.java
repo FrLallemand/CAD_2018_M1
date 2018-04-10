@@ -40,7 +40,7 @@ public class VuePrincipale extends JPanel implements Observer{
 	private JButton sauvegarder;
 	private JButton charger;	
 	private JButton placementAleatoire;
-
+	private JLabel fin;
 	private Modele modele;
 	private VueTerrain terrainJoueur, terrainTir;
 
@@ -112,6 +112,16 @@ public class VuePrincipale extends JPanel implements Observer{
         //constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.add(optionInfoTop,constraints);
 		
+		
+		fin= new JLabel();
+        fin.setVisible(false);
+		constraints.gridx = 1;
+        constraints.gridy = 2;
+        constraints.gridwidth = 1;
+        
+        //constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.add(fin,constraints);	
+		
 	}
 	
 	public void disablePlacementAleatoire() {
@@ -145,6 +155,18 @@ public class VuePrincipale extends JPanel implements Observer{
 			this.terrainTir.desactiveTerrain();
 			this.terrainJoueur.update();
 			this.terrainTir.update();			
+		}		
+		if(this.modele.getState() == GameState.FIN) {
+			if(this.modele.getJoueurGagnant() == Joueur.J1) {
+		        fin.setVisible(true);
+		        fin.setText("Gagnant : Joueur 1");
+			} else {
+		        fin.setVisible(true);
+		        fin.setText("Gagnant : Joueur 2");
+			}
+			this.terrainTir.desactiveTerrain();
+			this.terrainJoueur.update();
+			this.terrainTir.update();		
 		}
 	}
 
