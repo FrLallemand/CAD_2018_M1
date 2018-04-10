@@ -21,6 +21,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import Controleurs.NouvellePartieControleur;
 import Controleurs.PlacementControleur;
 import modeles.BatailleNavale;
 import modeles.Modele;
@@ -48,7 +49,7 @@ public class VuePrincipale extends JPanel implements Observer{
 		this.modele = m;
 		this.modele.addObserver(this);
 		//init JFrame
-		JFrame affichage = new JFrame("Bataille Navale");
+		affichage = new JFrame("Bataille Navale");
 		affichage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		affichage.setContentPane(this);
 		affichage.setVisible(true);
@@ -104,6 +105,8 @@ public class VuePrincipale extends JPanel implements Observer{
 		optionInfoTop.add(nouveau);
 		optionInfoTop.add(sauvegarder);
 		optionInfoTop.add(charger);
+		
+		nouveau.addActionListener(new NouvellePartieControleur(this));
 		
         constraints.insets = new Insets(0, 0, 0, 0);
         constraints.gridx = 0;
@@ -168,6 +171,10 @@ public class VuePrincipale extends JPanel implements Observer{
 			this.terrainJoueur.update();
 			this.terrainTir.update();		
 		}
+	}
+
+	public void destroy() {
+		this.affichage.dispose();
 	}
 
 }

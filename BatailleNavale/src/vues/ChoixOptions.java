@@ -22,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import Controleurs.OptionsControleur;
 import modeles.BatailleNavale;
 import modeles.Strategie;
 import modeles.Strategie.NomsStrategies;
@@ -35,6 +36,16 @@ import modeles.StrategieCroix;
 public class ChoixOptions implements Observer{
 
 	private ButtonGroup epoques;
+	public ButtonGroup getEpoques() {
+		return epoques;
+	}
+
+
+
+	public void setEpoques(ButtonGroup epoques) {
+		this.epoques = epoques;
+	}
+
 	private JToggleButton epoqueModerne;
 	private JToggleButton epoqueXVII;
 	private Map<String,NomsEpoques> map_epoques;
@@ -120,30 +131,32 @@ public class ChoixOptions implements Observer{
 		constraints.gridx = 1;
 		constraints.gridy = 2;
 		contentPane.add(commencer, constraints);
-		commencer.addActionListener(new LocalListener());
+		commencer.addActionListener(new OptionsControleur(this, this.modele));
 		frame.pack();
 		//frame.setVisible(true);
 
     }
     
+	public ButtonGroup getStrategies() {
+		return strategies;
+	}
 
-    class LocalListener implements ActionListener {
-    	
-    	public NomsEpoques getEpoque() {
-    		return map_epoques.get(epoques.getSelection().getActionCommand());
-    	}
-    	
-    	public NomsStrategies getStrategie() {
-    		return map_strategies.get(strategies.getSelection().getActionCommand());
-    	}
 
-    	@Override
-        public void actionPerformed(ActionEvent e) {
-    		frame.dispose();
-    		//System.out.println(epoques.getSelection().getActionCommand());
-    		modele.game(getEpoque(), getStrategie());
-        }
-    }
+
+	public void setStrategies(ButtonGroup strategies) {
+		this.strategies = strategies;
+	}
+
+
+
+	public NomsEpoques getEpoque(String e) {
+		return map_epoques.get(e);
+	}
+	
+	public NomsStrategies getStrategie(String s) {
+		return map_strategies.get(s);
+	}
+
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -151,8 +164,10 @@ public class ChoixOptions implements Observer{
 		
 	}
 
-
-
+	public void destroy() {
+		this.frame.dispose();
+	}
+	
 	public void visible() {
 		this.frame.setVisible(true);		
 	}
