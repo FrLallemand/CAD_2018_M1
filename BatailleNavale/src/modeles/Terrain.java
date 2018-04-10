@@ -7,7 +7,7 @@ import modeles.Position.Direction;
 import modeles.bateaux.Bateau;
 
 public class Terrain {
-	private Flotte flotteJ1, flotteJ2;
+	private Flotte flotte;
 	private int width, height;
 	public enum StatusCase{EAU, BATEAU, EAUTOUCHE, BATEAUTOUCHE};
 	private StatusCase cases[][];
@@ -50,33 +50,42 @@ public class Terrain {
 		this.rand = new Random();
 	}
 	
-	public void effectuerTir(int numeroJoueur, Position position) {
-		
+	public boolean effectuerTir(Position position) {
+		if(testerTir(position)) {
+			switch (flotte.effectuerTir(position)) {
+			case TOUCHE:
+				cases[position.getX()][position.getY()] = StatusCase.BATEAUTOUCHE;
+				break;
+			case EAU:
+				cases[position.getX()][position.getY()] = StatusCase.EAUTOUCHE;				
+				break;
+			default:
+				break;
+			}
+			return true;
+		} else {			
+			return false;
+		}
 	}
 
-	public boolean testerTir(int numeroJoueur, Position position) {
+	public boolean testerTir(Position position) {
+		if((position.getX() < this.width) && (position.getY() < this.height)) {
+			return true;
+		}
 		return false;
 	}
 
-	public Flotte getFlotteJ2() {
-		return flotteJ2;
-	}
-
-	public void setFlotteJ2(Flotte flotteJ2) {
-		this.flotteJ2 = flotteJ2;
-	}
-
 	public Flotte getFlotte() {
-		return flotteJ1;
+		return flotte;
 	}
 
 	public void setFlotte(Flotte flotteJ1) {
-		this.flotteJ1 = flotteJ1;
+		this.flotte = flotteJ1;
 	}
 
 	public void placementFlotteHasard() {
-		while(!flotteJ1.placementFini()) {
-			Bateau b = flotteJ1.bateauSuivantAPlacer();
+		while(!flotte.placementFini()) {
+			Bateau b = flotte.bateauSuivantAPlacer();
 			boolean placementValide = false;
 			while(!placementValide) {
 				int x = rand.nextInt(this.width + 1);
@@ -113,6 +122,12 @@ public class Terrain {
 					//System.out.print(" ");					
 					s += " ";
 					break;
+				case BATEAUTOUCHE:
+					s += "#";
+					break;
+				case EAUTOUCHE:
+					s += "O";
+					break;
 				default:
 					break;
 				}
@@ -123,7 +138,7 @@ public class Terrain {
 		return s;
 	}
 	public void placerSurTerrain(Bateau b, Position p) {
-		flotteJ1.placerBateauSuivant(p);
+		flotte.placerBateauSuivant(p);
 		int x = p.getX();
 		int y = p.getY();		
 		switch (p.getDirection()) {

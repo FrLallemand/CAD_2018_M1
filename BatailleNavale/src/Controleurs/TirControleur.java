@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import modeles.Modele;
+import modeles.Position;
 
 public class TirControleur implements ActionListener{
 	private Modele modele;
@@ -19,6 +20,7 @@ public class TirControleur implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		this.modele.effectuerTir(new Position(posX, posY));
 	}
 
 }

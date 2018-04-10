@@ -71,6 +71,7 @@ public class VueTerrain extends JPanel {
 				tmp.setBackground(Color.BLUE);
 				this.add(tmp);
 				tiles[w][h] = tmp;
+				tiles[w][h].addActionListener(new TirControleur(modele, w, h));
 			}
 		}
 	}
@@ -79,7 +80,15 @@ public class VueTerrain extends JPanel {
 		for(int w=0;w<terrain.getWidth();w++){
 			for(int h=0;h<terrain.getHeight();h++){
 				tiles[w][h].setEnabled(true);
-				tiles[w][h].addActionListener(new TirControleur(modele, w, h));
+			}
+		}
+	}
+
+
+	public void desactiveTerrain() {
+		for(int w=0;w<terrain.getWidth();w++){
+			for(int h=0;h<terrain.getHeight();h++){
+				tiles[w][h].setEnabled(false);
 			}
 		}
 	}
@@ -94,6 +103,7 @@ public class VueTerrain extends JPanel {
 					tmp.setBackground(Color.GREEN);
 					break;
 				case EAU:
+					tmp.setBackground(Color.BLUE);
 					break;
 				case BATEAUTOUCHE:
 					tmp.setBackground(Color.RED);

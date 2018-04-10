@@ -141,6 +141,11 @@ public class VuePrincipale extends JPanel implements Observer{
 			this.terrainJoueur.update();
 			this.terrainTir.update();
 		}
+		if(this.modele.getState() == GameState.ENCOURS && this.modele.getJoueur() == Joueur.J2) {
+			this.terrainTir.desactiveTerrain();
+			this.terrainJoueur.update();
+			this.terrainTir.update();			
+		}
 	}
 
 }
