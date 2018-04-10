@@ -137,6 +137,8 @@ public class Modele extends Observable{
 		}
 		if(this.terrainJ1.getFlotte().flotteDetruite() || this.terrainJ2.getFlotte().flotteDetruite() ) {
 			this.state = GameState.FIN;
+			this.setChanged();
+			this.notifyObservers();
 		}
 	}
 
