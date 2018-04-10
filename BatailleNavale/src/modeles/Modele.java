@@ -35,7 +35,7 @@ public class Modele extends Observable{
 			this.notifyObservers();
 		}
 		if(j == Joueur.J2 && state == GameState.DEMANDEBATEAUX) {
-			this.strategieJ2.placementBateaux(this.terrainJ2);
+			this.strategieJ2.placementBateaux();
 			this.setChanged();
 			this.notifyObservers();
 		}

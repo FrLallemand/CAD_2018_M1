@@ -50,12 +50,11 @@ public class Flotte implements Iterable<Bateau>{
 
 	
 	public boolean estDetruit(Bateau b) {
-		foreach()
 		return false;
 	}
 
 	public boolean flotteDetruite() {
-		foreach(Bateau b : this.bateaux){
+		for(Bateau b : this.bateaux){
 			if(!b.estDetruit()){
 				return false;
 			}

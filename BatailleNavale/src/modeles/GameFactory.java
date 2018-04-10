@@ -25,24 +25,24 @@ public class GameFactory {
 			break;
 		}
 		e.setBateauxEpoque();
-		
-		Strategie sJ2;
-		switch(strategieJ2) {
-		case ALEATOIRE:
-			sJ2 = new StrategieAleatoire();
-			break;
-		case CROIX:
-			sJ2 = new StrategieCroix();
-			break;
-		default:
-			sJ2 = new StrategieAleatoire();
-			break;
-		}
-		
 		Flotte flJ1 = new Flotte(new ArrayList<Bateau>(), e);
 		Flotte flJ2 = new Flotte(new ArrayList<Bateau>(), e);
 		Terrain tj1 = new Terrain(flJ1);
 		Terrain tj2 = new Terrain(flJ2);
+		
+		Strategie sJ2;
+		switch(strategieJ2) {
+		case ALEATOIRE:
+			sJ2 = new StrategieAleatoire(tj2);
+			break;
+		case CROIX:
+			sJ2 = new StrategieCroix(tj2);
+			break;
+		default:
+			sJ2 = new StrategieAleatoire(tj2);
+			break;
+		}
+		
 		Modele modele = new Modele(tj1, tj2);
 		modele.setStrategieJ2(sJ2);
 		return modele;

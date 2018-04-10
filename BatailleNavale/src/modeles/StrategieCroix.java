@@ -4,10 +4,9 @@ import modeles.bateaux.Bateau;
 
 public class StrategieCroix extends Strategie{
 
-	@Override
-	public void placementBateaux(Terrain t) {
-		// TODO Auto-generated method stub
-		
+	public StrategieCroix(Terrain t) {
+		super(t);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -20,6 +19,10 @@ public class StrategieCroix extends Strategie{
 	public Position choixPositionTir() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void placementBateaux() {
 	}
 
 }

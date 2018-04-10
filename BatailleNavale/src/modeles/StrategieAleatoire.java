@@ -6,11 +6,12 @@ import modeles.Position;
 import java.util.Random;
 
 public class StrategieAleatoire extends Strategie {
-	Random rand = new Random();
-
-	public void placementBateaux(){
-		this.terrain.placementFlotteHasard();
+	public StrategieAleatoire(Terrain t) {
+		super(t);
+		// TODO Auto-generated constructor stub
 	}
+
+	Random rand = new Random();
 
 	public Bateau choixBateauTir(){
 		return null;
@@ -21,5 +22,10 @@ public class StrategieAleatoire extends Strategie {
 		int y = rand.nextInt(this.terrain.getHeight() + 1);
 		Position p = new Position(x, y);
 		return p;
+	}
+
+	@Override
+	public void placementBateaux() {
+		this.terrain.placementFlotteHasard();
 	}
 }

@@ -8,7 +8,7 @@ public abstract class Strategie {
 	public enum NomsStrategies { ALEATOIRE, CROIX };
 
 	private int numeroJoueur;
-	private Terrain terrain;
+	protected Terrain terrain;
 	
 	public Strategie(Terrain t) {
 		this.terrain = t;
