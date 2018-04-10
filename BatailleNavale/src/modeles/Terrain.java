@@ -60,14 +60,12 @@ public class Terrain {
 				cases[position.getX()][position.getY()] = StatusCase.EAUTOUCHE;				
 				break;
 			case COULE:
-				System.out.println("coulé");
 				Bateau b = this.flotte.getBateau(position);
 				int x = b.getPosition().getX();
 				int y = b.getPosition().getY();
 				int taille = b.getTaille();
 				
 				for(int i = 0; i < taille; i++) {
-					System.out.println("on noircit une case");
 					if(b.getPosition().getDirection() == Direction.HORIZONTAL) {
 						this.cases[x+i][y] = StatusCase.COULE;
 					}
@@ -80,7 +78,6 @@ public class Terrain {
 			default:
 				break;
 			}
-			System.out.println(this);
 			return true;
 		} else {			
 			return false;
@@ -124,7 +121,6 @@ public class Terrain {
 				}
 			}
 		}
-		//System.out.println(this);
 	}
 	
 	
