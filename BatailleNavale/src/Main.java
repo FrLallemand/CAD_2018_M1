@@ -12,7 +12,6 @@ public class Main {
 		//bn.game();
 		
 		//VueTerrain vt=new VueTerrain();
-		
 	}
 
 }
