@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import modeles.Position.Direction;
 import modeles.bateaux.Bateau;
 import modeles.epoques.Epoque;
 
@@ -63,8 +64,14 @@ public class Flotte implements Iterable<Bateau>{
 		return true;
 	}
 
-	public ResultatTir effectuerTir(Position position) {
-		// TODO
+	public ResultatTir effectuerTir(Position tir) {
+		for(Bateau b : this.bateaux) {
+			if(b.testerTir(tir)) {
+				b.effectuerTir(tir);
+				return ResultatTir.TOUCHE;
+			}
+		}
+		
 		return ResultatTir.EAU;
 	}
 
