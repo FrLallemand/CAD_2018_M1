@@ -17,7 +17,10 @@ public class Bateau {
 	
 	public Bateau(int t, String n) {
 		tableauVie = new ArrayList<>();
-		this.setTaille(t);
+		for(int i = 0; i < t; i++) {
+			tableauVie.add(1);
+		}
+		this.taille = t;
 		this.nom = n;
 	}
 	
