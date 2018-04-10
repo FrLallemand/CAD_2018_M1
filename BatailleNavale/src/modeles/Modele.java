@@ -2,11 +2,13 @@ package modeles;
 
 import java.util.Observable;
 
+import javax.print.attribute.standard.JobHoldUntil;
+
 import modeles.bateaux.Bateau;
 
 public class Modele extends Observable{
 	public enum Joueur {J1, J2};
-	public enum GameState { ENCOURS, ECHECTIR, DEMANDEBATEAUX, FIN};
+	public enum GameState { ENCOURS, ECHECTIR, DEMANDEBATEAUX, FIN };
 	
 	// Strategie des joueurs
 	private Strategie strategieJ2;
@@ -26,6 +28,7 @@ public class Modele extends Observable{
 		this.demandePlacementBateau(Joueur.J1);
 		this.demandePlacementBateau(Joueur.J2);
 		this.state = GameState.ENCOURS;
+		
 	}
 
 	
@@ -101,18 +104,28 @@ public class Modele extends Observable{
 	}
 
 	public void effectuerTir(Position p) {
-		if(this.joueur == Joueur.J1) {	
+		if(this.joueur == Joueur.J1 && this.state != GameState.FIN) {	
 			if(this.terrainJ2.effectuerTir(p)) {
 				this.state = GameState.ENCOURS;
 				this.joueur = Joueur.J2;
 			} else {
 				this.state = GameState.ECHECTIR;
 				this.joueur = Joueur.J1;				
-			}
+			}	
+			
 			this.setChanged();
 			this.notifyObservers();
-		} else {
-			this.terrainJ1.effectuerTir(p);			
+			
+			Position tir = strategieJ2.choixPositionTir();
+			this.terrainJ1.effectuerTir(tir);
+			this.joueur = Joueur.J1;
+			this.state = GameState.ENCOURS;
+			
+			this.setChanged();
+			this.notifyObservers();
+		}
+		if(this.terrainJ1.getFlotte().flotteDetruite() || this.terrainJ2.getFlotte().flotteDetruite() ) {
+			this.state = GameState.FIN;
 		}
 	}
 
