@@ -139,6 +139,7 @@ public class VuePrincipale extends JPanel implements Observer{
 			this.disablePlacementAleatoire();
 			this.terrainTir.activeTerrain();
 			this.terrainJoueur.update();
+			this.terrainTir.update();
 		}
 	}
 
