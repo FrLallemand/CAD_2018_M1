@@ -6,6 +6,7 @@ import modeles.Terrain;
 public abstract class Strategie {
 	
 	public enum NomsStrategies { ALEATOIRE, CROIX };
+	protected NomsStrategies nomStrategie;
 
 	private int numeroJoueur;
 	protected Terrain terrain;
@@ -17,4 +18,7 @@ public abstract class Strategie {
 	public abstract void placementBateaux();
 	public abstract Bateau choixBateauTir();	
 	public abstract Position choixPositionTir();
+	public NomsStrategies getNomStrategie(){
+		return this.nomStrategie;
+	}
 }

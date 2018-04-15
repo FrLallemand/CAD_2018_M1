@@ -12,7 +12,11 @@ import modeles.epoques.Epoque.NomsEpoques;
 public abstract class Epoque {
 	public enum NomsEpoques { XVII, MODERNE};
 	private List<Supplier<Bateau>> bateauxEpoque;
-
+	protected NomsEpoques nom;
+	
+	public NomsEpoques getNom(){
+		return this.nom;
+	}
 	public void setBateauxEpoque() {
 		Epoque e = this;
 

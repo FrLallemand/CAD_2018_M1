@@ -1,5 +1,6 @@
 package modeles.epoques;
 
+import modeles.Epoque.NomsEpoques;
 import modeles.bateaux.Bateau;
 import modeles.bateaux.ContreTorpilleur;
 import modeles.bateaux.Croiseur;
@@ -9,6 +10,9 @@ import modeles.bateaux.Torpilleur;
 
 public class EpoqueModerne extends Epoque {
 
+	public EpoqueModerne(){
+		this.nom=NomsEpoques.MODERNE;
+	}
 
 	@Override
 	public Bateau getBateauTaille5() {

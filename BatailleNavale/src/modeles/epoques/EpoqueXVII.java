@@ -1,9 +1,14 @@
 package modeles.epoques;
 
+import modeles.Epoque.NomsEpoques;
 import modeles.bateaux.Bateau;
 
 public class EpoqueXVII extends Epoque{
-
+	
+	public EpoqueXVII(){
+		this.nom=NomsEpoques.XVII;
+	}
+	
 	@Override
 	public Bateau getBateauTaille5() {
 		// TODO Auto-generated method stub

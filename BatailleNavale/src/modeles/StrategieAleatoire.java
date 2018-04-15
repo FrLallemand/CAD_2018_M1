@@ -9,6 +9,7 @@ public class StrategieAleatoire extends Strategie {
 	public StrategieAleatoire(Terrain t) {
 		super(t);
 		// TODO Auto-generated constructor stub
+		this.nomStrategie=NomsStrategies.ALEATOIRE;
 	}
 
 	Random rand = new Random();

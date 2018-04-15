@@ -81,8 +81,13 @@ public class Bateau {
 		return this.position;
 	}
 
+	public String getNom(){
+		return this.nom;
+	}
+	
 	public boolean equals(Object o){
 		Bateau b = (Bateau) o;
 		return (b.getPosition().getX() == this.getPosition().getX() && b.getPosition().getY() == this.getPosition().getY());
  	}
+	
 }

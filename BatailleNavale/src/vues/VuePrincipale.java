@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 
 import Controleurs.NouvellePartieControleur;
 import Controleurs.PlacementControleur;
+import Controleurs.SauvegardeControlleur;
 import modeles.BatailleNavale;
 import modeles.Modele;
 import modeles.Modele.GameState;
@@ -107,6 +108,7 @@ public class VuePrincipale extends JPanel implements Observer{
 		optionInfoTop.add(charger);
 		
 		nouveau.addActionListener(new NouvellePartieControleur(this));
+		sauvegarder.addActionListener(new SauvegardeControlleur(this.sauvegarder,this.modele));
 		
         constraints.insets = new Insets(0, 0, 0, 0);
         constraints.gridx = 0;

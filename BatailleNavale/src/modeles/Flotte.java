@@ -108,4 +108,13 @@ public class Flotte implements Iterable<Bateau>{
 	public void setEpoque(Epoque epoque) {
 		this.epoque = epoque;
 	}
+	
+	public Bateau getBateauParID(int id){
+		return this.bateaux.get(id);
+	}
+	
+	public int getNbBateau(){
+		return this.bateaux.size();
+	}
+	
 }
