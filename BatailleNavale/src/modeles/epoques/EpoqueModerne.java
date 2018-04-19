@@ -1,6 +1,5 @@
 package modeles.epoques;
 
-import modeles.Epoque.NomsEpoques;
 import modeles.bateaux.Bateau;
 import modeles.bateaux.ContreTorpilleur;
 import modeles.bateaux.Croiseur;

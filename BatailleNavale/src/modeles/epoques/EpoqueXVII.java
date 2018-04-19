@@ -1,6 +1,5 @@
 package modeles.epoques;
 
-import modeles.Epoque.NomsEpoques;
 import modeles.bateaux.Bateau;
 
 public class EpoqueXVII extends Epoque{
