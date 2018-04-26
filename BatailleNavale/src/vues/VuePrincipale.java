@@ -14,6 +14,7 @@ import java.util.Observer;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import Controleurs.ChargementControlleur;
 import Controleurs.NouvellePartieControleur;
 import Controleurs.PlacementControleur;
 import Controleurs.SauvegardeControlleur;
@@ -28,6 +30,7 @@ import modeles.BatailleNavale;
 import modeles.Modele;
 import modeles.Modele.GameState;
 import modeles.Modele.Joueur;
+import modeles.Position;
 
 public class VuePrincipale extends JPanel implements Observer{
 
@@ -37,12 +40,13 @@ public class VuePrincipale extends JPanel implements Observer{
 	private JPanel ennemyView;
 	private JPanel ennemyViewTerrain;
 	private JPanel optionInfoTop;
-	private ButtonGroup orientation;
 	private JButton nouveau;
 	private JButton sauvegarder;
 	private JButton charger;	
 	private JButton placementAleatoire;
 	private JLabel fin;
+	private JLabel textOrientation;
+	private JComboBox orientation;
 	private Modele modele;
 	private VueTerrain terrainJoueur, terrainTir;
 
@@ -61,8 +65,12 @@ public class VuePrincipale extends JPanel implements Observer{
 
         constraints.insets = new Insets(25, 25, 25, 25);
         
+
+		orientation=new JComboBox(Position.Direction.values());
+		orientation.setSelectedIndex(1);
+        
         // Terrain affichant les bateaux du joueur
-		terrainJoueur = new VueTerrain(modele, false);		
+		terrainJoueur = new VueTerrain(modele, orientation);		
         constraints.fill = GridBagConstraints.VERTICAL;
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -91,14 +99,10 @@ public class VuePrincipale extends JPanel implements Observer{
 		//affichage menu/option/information supplementaires
 		optionInfoTop=new JPanel();
 		//selection orientation lors du placement des bateaux
-		optionInfoTop.add(new JLabel("Orientation :"));
-		orientation = new ButtonGroup();
-		JRadioButton H= new JRadioButton("Horizontal",true);
-		JRadioButton V= new JRadioButton("Vertical");
-		orientation.add(V);
-		orientation.add(H);
-		optionInfoTop.add(H);
-		optionInfoTop.add(V);
+		textOrientation=new JLabel("Orientation :");
+		optionInfoTop.add(textOrientation);
+		optionInfoTop.add(orientation);
+		
 		//partie menu
 		nouveau=new JButton("Nouveau");
 		sauvegarder=new JButton("Sauvegarder");
@@ -109,6 +113,7 @@ public class VuePrincipale extends JPanel implements Observer{
 		
 		nouveau.addActionListener(new NouvellePartieControleur(this));
 		sauvegarder.addActionListener(new SauvegardeControlleur(this.sauvegarder,this.modele));
+		charger.addActionListener(new ChargementControlleur(this.charger,this.modele));
 		
         constraints.insets = new Insets(0, 0, 0, 0);
         constraints.gridx = 0;
@@ -129,29 +134,36 @@ public class VuePrincipale extends JPanel implements Observer{
 		
 	}
 	
-	public void disablePlacementAleatoire() {
+	public void disablePlacement() {
 		this.placementAleatoire.setEnabled(false);
 		this.placementAleatoire.setVisible(false);
+		this.textOrientation.setVisible(false);
+		this.orientation.setVisible(false);
 	}
 
-	public void enablePlacementAleatoire() {
+	public void enablePlacement() {
 		this.placementAleatoire.setEnabled(true);
 		this.placementAleatoire.setVisible(true);
+		this.textOrientation.setVisible(true);
+		this.orientation.setVisible(true);
 	}
 
 	public void demandePlacementBateaux() {
-		this.enablePlacementAleatoire();
+		this.enablePlacement();
 	}
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(this.modele.getState() == GameState.DEMANDEBATEAUX && this.modele.getJoueur() == Joueur.J1) {
-			this.terrainJoueur.demandePlacementBateaux();
+			this.terrainJoueur.activeTerrain();
+			this.terrainJoueur.update();
 			// Demande de bateaux sur l'interface, puis passer au controleur
+		}else{
+			this.terrainJoueur.desactiveTerrain();
 		}
 		if(this.modele.getState() == GameState.ENCOURS && this.modele.getJoueur() == Joueur.J1) {
 			// Tour du joueur 1 (humain), affichage des bateaux, maj des terrains
-			this.disablePlacementAleatoire();
+			this.disablePlacement();
 			this.terrainTir.activeTerrain();
 			this.terrainJoueur.update();
 			this.terrainTir.update();

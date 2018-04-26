@@ -3,6 +3,7 @@ package modeles;
 import java.lang.Thread.State;
 import java.util.Random;
 
+import Exception.PopUpException;
 import modeles.Position.Direction;
 import modeles.bateaux.Bateau;
 
@@ -12,7 +13,7 @@ public class Terrain {
 	public enum StatusCase{EAU, COULE, BATEAU, EAUTOUCHE, BATEAUTOUCHE};
 	private StatusCase cases[][];
 	Random rand;
-			
+
 	public StatusCase[][] getCases() {
 		return cases;
 	}
@@ -38,8 +39,7 @@ public class Terrain {
 	}
 
 	public Terrain(Flotte flJ1) {
-		this.setFlotte(flJ1);
-		//this.setFlotteJ2(flJ2);		
+		this.setFlotte(flJ1);	
 		this.width = 10;
 		this.height = 10;
 		this.cases = new StatusCase[width][height];
@@ -49,7 +49,7 @@ public class Terrain {
 
 		this.rand = new Random();
 	}
-	
+
 	public boolean effectuerTir(Position position) {
 		if(testerTir(position)) {
 			switch (flotte.effectuerTir(position)) {
@@ -64,7 +64,7 @@ public class Terrain {
 				int x = b.getPosition().getX();
 				int y = b.getPosition().getY();
 				int taille = b.getTaille();
-				
+
 				for(int i = 0; i < taille; i++) {
 					if(b.getPosition().getDirection() == Direction.HORIZONTAL) {
 						this.cases[x+i][y] = StatusCase.COULE;
@@ -73,7 +73,7 @@ public class Terrain {
 						this.cases[x][y+i] = StatusCase.COULE;
 					}
 				}
-				
+
 				break;
 			default:
 				break;
@@ -122,8 +122,26 @@ public class Terrain {
 			}
 		}
 	}
-	
-	
+
+	public boolean placementFlotte(Position p) {
+		boolean placementValide=false;
+		if(!flotte.placementFini()) {
+			Bateau b = flotte.bateauSuivantAPlacer();
+			placementValide = placementValide(p, b);
+			try{
+				if(placementValide) {
+					placerSurTerrain(b, p);
+				}else{
+					throw new PopUpException("impossible de placer le bateau ici.");
+				}
+			}catch(PopUpException e){
+				e.printStackTrace();
+			}
+		}
+		return placementValide;
+	}
+
+
 	public String toString() {
 		String s = new String();
 		for(int i=0; i<width; i++) {
@@ -174,44 +192,44 @@ public class Terrain {
 			break;
 		}
 	}
-	
-	
+
+
 	public boolean placementValide(Position p, Bateau b) {
 		boolean valide = false;
 		// bonnes coordonnées ?
 		int x = p.getX();
 		int y = p.getY();
 		if((x >= 0 && x < this.width) && 
-			(y >= 0 && y < this.height)) {
-				int taille = b.getTaille();
-				switch (p.getDirection()) {
-				case HORIZONTAL:
-					if(x + taille <= this.width) {
-						for(int i=x; i<width; i++) {
-							if(cases[i][y] != StatusCase.EAU) {
-								valide = false;
-								break;
-							} else {
-								valide = true;
-							}
+				(y >= 0 && y < this.height)) {
+			int taille = b.getTaille();
+			switch (p.getDirection()) {
+			case HORIZONTAL:
+				if(x + taille <= this.width) {
+					for(int i=x; i<width; i++) {
+						if(cases[i][y] != StatusCase.EAU) {
+							valide = false;
+							break;
+						} else {
+							valide = true;
 						}
 					}
-					break;
-				case VERTICAL:
-					if(y + taille <= this.height) {
-						for(int i=y; i<height; i++) {
-							if(cases[x][i] != StatusCase.EAU) {
-								valide = false;
-								break;
-							} else {
-								valide = true;
-							}
-						}
-					}
-					break;
-				default:
-					break;
 				}
+				break;
+			case VERTICAL:
+				if(y + taille <= this.height) {
+					for(int i=y; i<height; i++) {
+						if(cases[x][i] != StatusCase.EAU) {
+							valide = false;
+							break;
+						} else {
+							valide = true;
+						}
+					}
+				}
+				break;
+			default:
+				break;
+			}
 			// pas de bateau ici ?
 		}
 		return valide;

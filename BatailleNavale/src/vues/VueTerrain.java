@@ -15,11 +15,13 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import Controleurs.PlacementControleur;
 import Controleurs.TirControleur;
 import modeles.Terrain;
 import modeles.Modele;
@@ -55,12 +57,27 @@ public class VueTerrain extends JPanel {
 		this.setLayout(new GridLayout(terrain.getHeight()+decalage, terrain.getWidth()+decalage));
 		this.setPreferredSize(new Dimension((terrain.getHeight()+decalage)*HEIGHT,(terrain.getHeight()+decalage)*WIDTH));
 		this.tiles = new JButton[terrain.getHeight()][terrain.getWidth()];
-		this.initialize();
+		this.initialize(null);
+		this.setVisible(true);
+	}
+	
+	public VueTerrain(Modele m, JComboBox orientation) {
+		modele = m;
+		estTerrainTir = false;
+		if(estTerrainTir) {			
+			terrain = m.getTerrainJ2();
+		} else {
+			terrain = m.getTerrainJ1();
+		}
+		this.setLayout(new GridLayout(terrain.getHeight()+decalage, terrain.getWidth()+decalage));
+		this.setPreferredSize(new Dimension((terrain.getHeight()+decalage)*HEIGHT,(terrain.getHeight()+decalage)*WIDTH));
+		this.tiles = new JButton[terrain.getHeight()][terrain.getWidth()];
+		this.initialize(orientation);
 		this.setVisible(true);
 	}
 	
 	
-	public void initialize() {
+	public void initialize(JComboBox orientation) {
 		this.add(new JLabel("",SwingConstants.CENTER));
 		for(int w=1;w<terrain.getWidth()+1;w++){
 			this.add(new JLabel(String.valueOf(w),SwingConstants.CENTER));		
@@ -73,7 +90,12 @@ public class VueTerrain extends JPanel {
 				tmp.setBackground(Color.BLUE);
 				this.add(tmp);
 				tiles[w][h] = tmp;
-				tiles[w][h].addActionListener(new TirControleur(modele, w, h));
+				if(this.estTerrainTir){
+					tiles[w][h].addActionListener(new TirControleur(modele, w, h));
+				}else{
+					tiles[w][h].addActionListener(new PlacementControleur(modele, w, h,orientation));
+					
+				}
 			}
 		}
 	}
@@ -127,17 +149,6 @@ public class VueTerrain extends JPanel {
 				
 			}
 		}		
-	}
-
-	public void demandePlacementBateaux() {
-		/*
-		for(int w=0;w<tiles.length;w++){
-			for(int h=0;h<tiles[0].length;h++){
-				JButton b = tiles[w][h];
-				b.addMouseListener(new LocalMouseListener(w, h));
-
-			}
-		}*/
 	}
 	
 	 class LocalMouseListener implements MouseListener{

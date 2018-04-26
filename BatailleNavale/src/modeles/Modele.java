@@ -4,6 +4,7 @@ import java.util.Observable;
 
 import javax.print.attribute.standard.JobHoldUntil;
 
+import modeles.Position.Direction;
 import modeles.bateaux.Bateau;
 
 public class Modele extends Observable{
@@ -25,10 +26,9 @@ public class Modele extends Observable{
 	}	
 	
 	public void run() {
+		this.state = GameState.DEMANDEBATEAUX;
 		this.demandePlacementBateau(Joueur.J1);
 		this.demandePlacementBateau(Joueur.J2);
-		this.state = GameState.ENCOURS;
-		
 	}
 
 	
@@ -47,6 +47,16 @@ public class Modele extends Observable{
 	public void placementAleatoire() {
 		this.terrainJ1.placementFlotteHasard();
 		state = GameState.ENCOURS;
+		this.setChanged();
+		this.notifyObservers();
+
+	}
+	
+	public void placementjoueur(int x, int y, Direction dir) {
+		this.terrainJ1.placementFlotte(new Position(x,y,dir));
+		if(this.terrainJ1.getFlotte().placementFini()){
+			state = GameState.ENCOURS;
+		}
 		this.setChanged();
 		this.notifyObservers();
 
@@ -74,10 +84,14 @@ public class Modele extends Observable{
 
 	public void setTerrainJ1(Terrain terrain) {
 		this.terrainJ1 = terrain;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	public void setTerrainJ2(Terrain terrain) {
 		this.terrainJ2 = terrain;
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public Strategie getStrategieJ2() {
