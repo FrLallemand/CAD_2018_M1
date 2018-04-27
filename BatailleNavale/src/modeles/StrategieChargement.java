@@ -12,9 +12,8 @@ public class StrategieChargement extends Strategie {
 	ArrayList<Position> tir;
 	ArrayList<Position> bateaux;
 	
-	public StrategieChargement(Terrain t) {
+	public StrategieChargement(Terrain t, Terrain tj1) {
 		super(t);
-		// TODO Auto-generated constructor stub
 	}
 
 	public StrategieChargement(ArrayList<Position> tir, ArrayList<Position> bateaux) {

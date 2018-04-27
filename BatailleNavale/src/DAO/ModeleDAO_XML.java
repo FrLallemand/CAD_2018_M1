@@ -230,8 +230,8 @@ public class ModeleDAO_XML implements ModeleDAO{
 		return posTir;
 	}
 	
-	private Strategie getStrategie(String stratergie,Terrain tj2){
-		return GameFactory.getStrategie(stratergie, tj2);
+	private Strategie getStrategie(String strategie,Terrain tj2){
+		return GameFactory.getStrategie(strategie, tj2);
 	}
 	
 	private Epoque getEpoque(String epoque){

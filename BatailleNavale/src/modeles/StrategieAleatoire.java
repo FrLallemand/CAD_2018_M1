@@ -6,13 +6,13 @@ import modeles.Position;
 import java.util.Random;
 
 public class StrategieAleatoire extends Strategie {
+	private Random rand;
+
 	public StrategieAleatoire(Terrain t) {
 		super(t);
-		// TODO Auto-generated constructor stub
+		rand = new Random();
 		this.nomStrategie=NomsStrategies.ALEATOIRE;
 	}
-
-	Random rand = new Random();
 
 	public Bateau choixBateauTir(){
 		return null;

@@ -9,16 +9,26 @@ public abstract class Strategie {
 	protected NomsStrategies nomStrategie;
 
 	private int numeroJoueur;
-	protected Terrain terrain;
+	protected Terrain terrain, terrainAdversaire;
 	
+
 	public Strategie(Terrain t) {
 		this.terrain = t;
 	}
 	
-	public abstract void placementBateaux();
-	public abstract Bateau choixBateauTir();	
-	public abstract Position choixPositionTir();
+	public Terrain getTerrainAdversaire() {
+		return terrainAdversaire;
+	}
+	
+	public void setTerrainAdversaire(Terrain terrainAdversaire) {
+		this.terrainAdversaire = terrainAdversaire;
+	}
+	
 	public NomsStrategies getNomStrategie(){
 		return this.nomStrategie;
 	}
+
+	public abstract void placementBateaux();
+	public abstract Bateau choixBateauTir();	
+	public abstract Position choixPositionTir();
 }

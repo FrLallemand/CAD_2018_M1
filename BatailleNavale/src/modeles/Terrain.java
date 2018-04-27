@@ -14,6 +14,30 @@ public class Terrain {
 	private StatusCase cases[][];
 	Random rand;
 
+	public boolean estEau(Position p) {
+		if(cases[p.getY()][p.getX()] == StatusCase.EAU)
+			return true;
+		return false;
+	}	
+
+	public boolean estCoule(Position p) {
+		if(cases[p.getY()][p.getX()] == StatusCase.COULE)
+			return true;
+		return false;
+	}	
+
+	public boolean estEauTouche(Position p) {
+		if(cases[p.getY()][p.getX()] == StatusCase.EAUTOUCHE)
+			return true;
+		return false;
+	}	
+
+	public boolean estBateauTouche(Position p) {
+		if(cases[p.getY()][p.getX()] == StatusCase.BATEAUTOUCHE)
+			return true;
+		return false;
+	}	
+
 	public StatusCase[][] getCases() {
 		return cases;
 	}
@@ -205,7 +229,7 @@ public class Terrain {
 			int taille = b.getTaille();
 			switch (p.getDirection()) {
 			case HORIZONTAL:
-				if(x + taille < this.width) {
+				if(x + taille <= this.width) {
 					for(int i=x; i< x+taille; i++) {
 						if(cases[y][i] != StatusCase.EAU) {
 							valide = false;
@@ -218,7 +242,7 @@ public class Terrain {
 				break;
 			case VERTICAL:
 				if(y + taille < this.height) {
-					for(int i=y; i< y+taille; i++) {
+					for(int i=y; i<= y+taille; i++) {
 						if(cases[i][x] != StatusCase.EAU) {
 							valide = false;
 							break;

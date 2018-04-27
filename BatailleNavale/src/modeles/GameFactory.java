@@ -42,6 +42,7 @@ public class GameFactory {
 			sJ2 = new StrategieAleatoire(tj2);
 			break;
 		}
+		sJ2.setTerrainAdversaire(tj1);
 
 		Modele modele = new Modele(tj1, tj2);
 		modele.setStrategieJ2(sJ2);
