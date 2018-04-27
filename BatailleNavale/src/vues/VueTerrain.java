@@ -101,18 +101,18 @@ public class VueTerrain extends JPanel {
 	}
 	
 	public void activeTerrain() {
-		for(int w=0;w<terrain.getWidth();w++){
-			for(int h=0;h<terrain.getHeight();h++){
-				tiles[w][h].setEnabled(true);
+		for(int h=0;h<terrain.getHeight();h++){
+			for(int w=0;w<terrain.getWidth();w++){
+				tiles[h][w].setEnabled(true);
 			}
 		}
 	}
 
 
 	public void desactiveTerrain() {
-		for(int w=0;w<terrain.getWidth();w++){
-			for(int h=0;h<terrain.getHeight();h++){
-				tiles[w][h].setEnabled(false);
+		for(int h=0;h<terrain.getHeight();h++){
+			for(int w=0;w<terrain.getWidth();w++){
+				tiles[h][w].setEnabled(false);
 			}
 		}
 	}
@@ -150,65 +150,4 @@ public class VueTerrain extends JPanel {
 			}
 		}		
 	}
-	
-	 class LocalMouseListener implements MouseListener{
-			private Color old;
-			private int w, h;
-			
-		 	public LocalMouseListener(int w, int h) {
-		 		this.w = w;
-		 		this.h = h;
-    			//System.out.println(this.w + " " + this.h);
-
-		 	}
-		 
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				for(int i = this.w; i<(this.w+5); i++) {
-					if(i<tiles.length) {
-						if(this.w+5 <= tiles.length) {
-				    			//System.out.println(this.w + " " + this.h);
-								JButton b = tiles[i][h];		    			
-								old = b.getBackground();
-				    			b.setBackground(Color.GREEN);
-						} else {
-			    			//System.out.println(this.w + " " + this.h);
-							JButton b = tiles[i][h];		    			
-							old = b.getBackground();
-			    			b.setBackground(Color.RED);						
-						}
-					}
-				}
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				for(int i = w; i<(w+5); i++) {
-		    		if(i<tiles.length) {
-						JButton b = tiles[i][h];		    			
-						old = b.getBackground();
-		    			b.setBackground(SEA);				
-		    		}
-		    	}
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-	    }
-
 }

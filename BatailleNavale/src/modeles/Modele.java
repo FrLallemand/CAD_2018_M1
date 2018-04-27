@@ -62,9 +62,8 @@ public class Modele extends Observable{
 
 	}
 	
-	public Bateau demandeChoixBateau(int numeroJoueur) {
-		//TODO
-		return null;		
+	public Bateau demandeChoixBateau() {
+		return this.terrainJ1.suivant();		
 	}
 	
 	public Position demandePositionTir(int numeroJoueur) {

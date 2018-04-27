@@ -100,7 +100,7 @@ public class Terrain {
 
 	public void placementFlotteHasard() {
 		while(!flotte.placementFini()) {
-			Bateau b = flotte.bateauSuivantAPlacer();
+			Bateau b = suivant();
 			boolean placementValide = false;
 			while(!placementValide) {
 				int x = rand.nextInt(this.width + 1);
@@ -125,7 +125,7 @@ public class Terrain {
 	public boolean placementFlotte(Position p) {
 		boolean placementValide=false;
 		if(!flotte.placementFini()) {
-			Bateau b = flotte.bateauSuivantAPlacer();
+			Bateau b = suivant();
 			placementValide = placementValide(p, b);
 			try{
 				if(placementValide) {
@@ -233,6 +233,10 @@ public class Terrain {
 			}
 		}
 		return valide;
+	}
+	
+	public Bateau suivant() {
+		return flotte.bateauSuivantAPlacer();
 	}
 
 }

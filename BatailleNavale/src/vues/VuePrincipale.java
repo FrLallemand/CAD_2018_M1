@@ -45,8 +45,8 @@ public class VuePrincipale extends JPanel implements Observer{
 	private JButton charger;	
 	private JButton placementAleatoire;
 	private JLabel fin;
-	private JLabel textOrientation;
 	private JComboBox orientation;
+	private JLabel labelBateau;
 	private Modele modele;
 	private VueTerrain terrainJoueur, terrainTir;
 
@@ -58,17 +58,14 @@ public class VuePrincipale extends JPanel implements Observer{
 		affichage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		affichage.setContentPane(this);
 		affichage.setVisible(true);
-		affichage.setSize(900, 500);
+		affichage.setSize(900, 600);
 
 		this.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 
         constraints.insets = new Insets(25, 25, 25, 25);
-        
-
 		orientation=new JComboBox(Position.Direction.values());
-		orientation.setSelectedIndex(0);
-        
+
         // Terrain affichant les bateaux du joueur
 		terrainJoueur = new VueTerrain(modele, orientation);		
         constraints.fill = GridBagConstraints.VERTICAL;
@@ -93,15 +90,23 @@ public class VuePrincipale extends JPanel implements Observer{
         constraints.gridx = 0;
         constraints.gridy = 2;
         this.add(placementAleatoire, constraints);
+        
+
+        //selection orientation lors du placement des bateaux
+		orientation.setSelectedIndex(0);
+        constraints.insets = new Insets(0, 0, 2, 0);
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        this.add(orientation, constraints);
+        labelBateau = new JLabel();
+        constraints.gridy = 4;
+        this.add(labelBateau, constraints);
+
 
         this.setVisible(true);
         		
 		//affichage menu/option/information supplementaires
 		optionInfoTop=new JPanel();
-		//selection orientation lors du placement des bateaux
-		textOrientation=new JLabel("Orientation :");
-		optionInfoTop.add(textOrientation);
-		optionInfoTop.add(orientation);
 		
 		//partie menu
 		nouveau=new JButton("Nouveau");
@@ -137,14 +142,16 @@ public class VuePrincipale extends JPanel implements Observer{
 	public void disablePlacement() {
 		this.placementAleatoire.setEnabled(false);
 		this.placementAleatoire.setVisible(false);
-		this.textOrientation.setVisible(false);
+		//this.textOrientation.setVisible(false);
 		this.orientation.setVisible(false);
+		this.labelBateau.setVisible(false);
 	}
 
 	public void enablePlacement() {
 		this.placementAleatoire.setEnabled(true);
 		this.placementAleatoire.setVisible(true);
-		this.textOrientation.setVisible(true);
+		//this.textOrientation.setVisible(true);
+		this.labelBateau.setVisible(true);
 		this.orientation.setVisible(true);
 	}
 
@@ -157,6 +164,7 @@ public class VuePrincipale extends JPanel implements Observer{
 		if(this.modele.getState() == GameState.DEMANDEBATEAUX && this.modele.getJoueur() == Joueur.J1) {
 			this.terrainJoueur.activeTerrain();
 			this.terrainJoueur.update();
+			this.labelBateau.setText("Bateau à placer: " + this.modele.demandeChoixBateau().getNom());
 			// Demande de bateaux sur l'interface, puis passer au controleur
 		}else{
 			this.terrainJoueur.desactiveTerrain();
