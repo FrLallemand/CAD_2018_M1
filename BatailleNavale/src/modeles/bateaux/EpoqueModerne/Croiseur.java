@@ -1,6 +1,7 @@
-package modeles.bateaux;
+package modeles.bateaux.EpoqueModerne;
 
 import modeles.Position;
+import modeles.bateaux.Bateau;
 
 public class Croiseur extends Bateau {
 

@@ -82,18 +82,18 @@ public class VueTerrain extends JPanel {
 		for(int w=1;w<terrain.getWidth()+1;w++){
 			this.add(new JLabel(String.valueOf(w),SwingConstants.CENTER));		
 		}
-		for(int w=0;w<terrain.getWidth();w++){
-			this.add(new JLabel(String.valueOf(alphabet[w]),SwingConstants.CENTER));
-			for(int h=0;h<terrain.getHeight();h++){
+		for(int h=0;h<terrain.getHeight();h++){
+			this.add(new JLabel(String.valueOf(alphabet[h]),SwingConstants.CENTER));
+			for(int w=0;w<terrain.getWidth();w++){
 				JButton tmp = new JButton();
 				tmp.setEnabled(false);
 				tmp.setBackground(Color.BLUE);
 				this.add(tmp);
-				tiles[w][h] = tmp;
+				tiles[h][w] = tmp;
 				if(this.estTerrainTir){
-					tiles[w][h].addActionListener(new TirControleur(modele, w, h));
+					tiles[h][w].addActionListener(new TirControleur(modele, w, h));
 				}else{
-					tiles[w][h].addActionListener(new PlacementControleur(modele, w, h,orientation));
+					tiles[h][w].addActionListener(new PlacementControleur(modele, w, h, orientation));
 					
 				}
 			}

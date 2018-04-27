@@ -67,7 +67,7 @@ public class VuePrincipale extends JPanel implements Observer{
         
 
 		orientation=new JComboBox(Position.Direction.values());
-		orientation.setSelectedIndex(1);
+		orientation.setSelectedIndex(0);
         
         // Terrain affichant les bateaux du joueur
 		terrainJoueur = new VueTerrain(modele, orientation);		

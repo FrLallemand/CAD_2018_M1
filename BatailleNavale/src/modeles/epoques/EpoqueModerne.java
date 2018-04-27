@@ -1,11 +1,11 @@
 package modeles.epoques;
 
 import modeles.bateaux.Bateau;
-import modeles.bateaux.ContreTorpilleur;
-import modeles.bateaux.Croiseur;
-import modeles.bateaux.PorteAvions;
-import modeles.bateaux.SousMarin;
-import modeles.bateaux.Torpilleur;
+import modeles.bateaux.EpoqueModerne.ContreTorpilleur;
+import modeles.bateaux.EpoqueModerne.Croiseur;
+import modeles.bateaux.EpoqueModerne.PorteAvions;
+import modeles.bateaux.EpoqueModerne.SousMarin;
+import modeles.bateaux.EpoqueModerne.Torpilleur;
 
 public class EpoqueModerne extends Epoque {
 

@@ -22,7 +22,10 @@ public class Flotte implements Iterable<Bateau>{
 		this.bateauxAPlacer = new LinkedList<Bateau>();
 		this.bateaux = liste_origine;
 		for(int i=0; i<epoque.getBateauxEpoqueSize(); i++) {
-			bateauxAPlacer.add(epoque.getBateauxEpoque(i).get());
+			Bateau b = epoque.getBateauxEpoque(i).get();
+			if(b != null) {
+				bateauxAPlacer.add(epoque.getBateauxEpoque(i).get());
+			}
 		}
 		//bateauxAPlacer = bateaux.size();
 	}

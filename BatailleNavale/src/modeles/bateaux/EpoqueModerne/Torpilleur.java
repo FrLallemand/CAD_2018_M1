@@ -1,6 +1,7 @@
-package modeles.bateaux;
+package modeles.bateaux.EpoqueModerne;
 
 import modeles.Position;
+import modeles.bateaux.Bateau;
 
 public class Torpilleur extends Bateau{
 

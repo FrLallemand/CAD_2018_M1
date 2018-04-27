@@ -42,9 +42,9 @@ public class Terrain {
 		this.setFlotte(flJ1);	
 		this.width = 10;
 		this.height = 10;
-		this.cases = new StatusCase[width][height];
-		for(int i=0; i<width; i++)
-			for(int j=0; j<height; j++)
+		this.cases = new StatusCase[height][width];
+		for(int i=0; i<height; i++)
+			for(int j=0; j<width; j++)
 				cases[i][j] = StatusCase.EAU;
 
 		this.rand = new Random();
@@ -135,7 +135,7 @@ public class Terrain {
 					throw new PopUpException("impossible de placer le bateau ici.");
 				}
 			}catch(PopUpException e){
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 		return placementValide;
@@ -144,8 +144,8 @@ public class Terrain {
 
 	public String toString() {
 		String s = new String();
-		for(int i=0; i<width; i++) {
-			for(int j=0; j<height; j++) {
+		for(int i=0; i<height; i++) {
+			for(int j=0; j<width; j++) {
 				switch (cases[i][j]) {
 				case BATEAU:
 					//System.out.print("X");
@@ -180,12 +180,12 @@ public class Terrain {
 		switch (p.getDirection()) {
 		case HORIZONTAL:
 			for(int i=x; i< x+b.getTaille(); i++) {
-				cases[i][y] = StatusCase.BATEAU;
+				cases[y][i] = StatusCase.BATEAU;
 			}			
 			break;
 		case VERTICAL:
-			for(int i=y; i< y+ b.getTaille(); i++) {
-				cases[x][i] = StatusCase.BATEAU;
+			for(int i=y; i< y+b.getTaille(); i++) {
+				cases[i][x] = StatusCase.BATEAU;
 			}						
 			break;
 		default:
@@ -199,14 +199,16 @@ public class Terrain {
 		// bonnes coordonnées ?
 		int x = p.getX();
 		int y = p.getY();
+		//if(b.getPosition().getDirection() == Direction.HORIZONTAL) {
+			
 		if((x >= 0 && x < this.width) && 
 				(y >= 0 && y < this.height)) {
 			int taille = b.getTaille();
 			switch (p.getDirection()) {
 			case HORIZONTAL:
-				if(x + taille <= this.width) {
-					for(int i=x; i<width; i++) {
-						if(cases[i][y] != StatusCase.EAU) {
+				if(x + taille < this.width) {
+					for(int i=x; i< x+taille; i++) {
+						if(cases[y][i] != StatusCase.EAU) {
 							valide = false;
 							break;
 						} else {
@@ -216,9 +218,9 @@ public class Terrain {
 				}
 				break;
 			case VERTICAL:
-				if(y + taille <= this.height) {
-					for(int i=y; i<height; i++) {
-						if(cases[x][i] != StatusCase.EAU) {
+				if(y + taille < this.height) {
+					for(int i=y; i< y+taille; i++) {
+						if(cases[i][x] != StatusCase.EAU) {
 							valide = false;
 							break;
 						} else {
@@ -230,7 +232,6 @@ public class Terrain {
 			default:
 				break;
 			}
-			// pas de bateau ici ?
 		}
 		return valide;
 	}

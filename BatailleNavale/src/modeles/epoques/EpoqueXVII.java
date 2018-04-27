@@ -1,6 +1,10 @@
 package modeles.epoques;
 
 import modeles.bateaux.Bateau;
+import modeles.bateaux.EpoqueXVII.Corvette;
+import modeles.bateaux.EpoqueXVII.Fregate;
+import modeles.bateaux.EpoqueXVII.Gallion;
+import modeles.bateaux.EpoqueXVII.Goelette;
 
 public class EpoqueXVII extends Epoque{
 	
@@ -10,32 +14,28 @@ public class EpoqueXVII extends Epoque{
 	
 	@Override
 	public Bateau getBateauTaille5() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Gallion();
 	}
 
 	@Override
 	public Bateau getBateauTaille4() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Fregate();
 	}
 
 	@Override
 	public Bateau getBateauTaille3V1() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Goelette();
 	}
 
 	@Override
 	public Bateau getBateauTaille3V2() {
-		// TODO Auto-generated method stub
+		// On choisi de ne pas mettre de deuxime bateau de taille 3 pour cette époque
 		return null;
 	}
 
 	@Override
 	public Bateau getBateauTaille2() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Corvette();
 	}
 
 

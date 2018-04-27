@@ -33,6 +33,7 @@ public class PlacementControleur implements ActionListener{
 		if(alea){
 			this.modele.placementAleatoire();
 		}else{
+			//System.out.println(x+ " "+ y);
 			if(orientation.getSelectedIndex()==0){
 				this.modele.placementjoueur(x, y, Direction.HORIZONTAL);
 			}else{
