@@ -54,10 +54,10 @@ public class Terrain {
 		if(testerTir(position)) {
 			switch (flotte.effectuerTir(position)) {
 			case TOUCHE:
-				cases[position.getX()][position.getY()] = StatusCase.BATEAUTOUCHE;
+				cases[position.getY()][position.getX()] = StatusCase.BATEAUTOUCHE;
 				break;
 			case EAU:
-				cases[position.getX()][position.getY()] = StatusCase.EAUTOUCHE;				
+				cases[position.getY()][position.getX()] = StatusCase.EAUTOUCHE;				
 				break;
 			case COULE:
 				Bateau b = this.flotte.getBateau(position);
@@ -67,13 +67,12 @@ public class Terrain {
 
 				for(int i = 0; i < taille; i++) {
 					if(b.getPosition().getDirection() == Direction.HORIZONTAL) {
-						this.cases[x+i][y] = StatusCase.COULE;
+						this.cases[y][x+i] = StatusCase.COULE;
 					}
 					else {
-						this.cases[x][y+i] = StatusCase.COULE;
+						this.cases[y+i][x] = StatusCase.COULE;
 					}
 				}
-
 				break;
 			default:
 				break;
