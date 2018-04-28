@@ -66,7 +66,7 @@ public class ModeleDAO_XML implements ModeleDAO{
 
 
 			//joueur 2
-			Terrain t2=m.getTerrainJ1();
+			Terrain t2=m.getTerrainJ2();
 			Flotte f2=t2.getFlotte();
 			Element terrainJ2 = document.createElement("TerrainJ2");
 			racine.appendChild(terrainJ2);
@@ -130,14 +130,16 @@ public class ModeleDAO_XML implements ModeleDAO{
 		for(int x=0;x<cases.length;x++){
 			for(int y=0;y<cases[x].length;y++){
 				if(cases[x][y]!=StatusCase.EAU){
-					elCase=document.createElement("tir");    	
-					posX=document.createElement("posX");
-					posX.appendChild(document.createTextNode(x+""));
-					posY=document.createElement("posY");
-					posY.appendChild(document.createTextNode(y+""));
-					elCase.appendChild(posX);
-					elCase.appendChild(posY);
-					XMLCases.appendChild(elCase);
+					if(cases[x][y]!=StatusCase.BATEAU){
+						elCase=document.createElement("tir");    	
+						posX=document.createElement("posX");
+						posX.appendChild(document.createTextNode(x+""));
+						posY=document.createElement("posY");
+						posY.appendChild(document.createTextNode(y+""));
+						elCase.appendChild(posX);
+						elCase.appendChild(posY);
+						XMLCases.appendChild(elCase);
+					}
 				}
 			}
 		}
@@ -181,11 +183,16 @@ public class ModeleDAO_XML implements ModeleDAO{
 			Flotte fj2=new Flotte(new ArrayList<Bateau>(),getEpoque(epoqueJ2.getTextContent()));
 			m.getTerrainJ1().setFlotte(fj1);
 			m.getTerrainJ2().setFlotte(fj2);
+			m.getTerrainJ1().resetTerrain();
+			m.getTerrainJ2().resetTerrain();
 			ArrayList<Position> tirsJ2=chargementTir(listcasesJ1);
 			ArrayList<Position> tirsJ1=chargementTir(listcasesJ2);
 			m.setStrategieJ2(new StrategieChargement(tirsJ2,fb2));
 			//partie bateaux
-			m.run();
+			for(int x=0;x<fb1.size();x++){			
+				m.placement(fb2.get(x).getX(), fb2.get(x).getY(), fb2.get(x).getDirection(),false);
+				m.placement(fb1.get(x).getX(), fb1.get(x).getY(), fb1.get(x).getDirection(),true);
+			};
 			//partie tirs
 			for(int x=0;x<tirsJ1.size();x++){
 				m.effectuerTir(tirsJ1.get(x));				
@@ -217,7 +224,7 @@ public class ModeleDAO_XML implements ModeleDAO{
 		}
 		return p;
 	}
-	
+
 	private ArrayList<Position> chargementTir(NodeList tirs){
 		int posx,posy;
 		ArrayList<Position> posTir=new ArrayList<Position>();
@@ -229,11 +236,11 @@ public class ModeleDAO_XML implements ModeleDAO{
 		}
 		return posTir;
 	}
-	
+
 	private Strategie getStrategie(String strategie,Terrain tj2){
 		return GameFactory.getStrategie(strategie, tj2);
 	}
-	
+
 	private Epoque getEpoque(String epoque){
 		return GameFactory.getEpoque(epoque);
 	}

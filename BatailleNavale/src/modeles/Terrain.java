@@ -262,5 +262,11 @@ public class Terrain {
 	public Bateau suivant() {
 		return flotte.bateauSuivantAPlacer();
 	}
+	
+	public void resetTerrain(){
+		for(int i=0; i<height; i++)
+			for(int j=0; j<width; j++)
+				cases[i][j] = StatusCase.EAU;		
+	}
 
 }

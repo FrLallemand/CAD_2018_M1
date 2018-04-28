@@ -80,6 +80,7 @@ public class GameFactory {
 			e = new EpoqueModerne();
 			break;
 		}
+		e.setBateauxEpoque();
 		return e;
 	}
 	

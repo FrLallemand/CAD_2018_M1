@@ -52,9 +52,15 @@ public class Modele extends Observable{
 
 	}
 	
-	public void placementjoueur(int x, int y, Direction dir) {
-		this.terrainJ1.placementFlotte(new Position(x,y,dir));
-		if(this.terrainJ1.getFlotte().placementFini()){
+	public void placement(int x, int y, Direction dir,boolean joueur) {
+		Terrain terrain;
+		if(joueur){
+			terrain=this.terrainJ1;			
+		}else{
+			terrain=this.terrainJ2;			
+		}
+		terrain.placementFlotte(new Position(x,y,dir));
+		if(terrain.getFlotte().placementFini()&&joueur){
 			state = GameState.ENCOURS;
 		}
 		this.setChanged();

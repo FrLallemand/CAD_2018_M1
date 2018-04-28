@@ -28,7 +28,7 @@ public class ChargementControlleur implements ActionListener {
 	    	//ex : C:\Users\Guillaume\Documents\lol.test
 	        String f=fc.getSelectedFile().getAbsolutePath();
 	        ModeleDAO_XML load=new ModeleDAO_XML(m);
-	        //load.chargement(f);
+	        load.chargement(f);
 	    }
 
 	}

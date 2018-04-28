@@ -35,9 +35,9 @@ public class PlacementControleur implements ActionListener{
 		}else{
 			//System.out.println(x+ " "+ y);
 			if(orientation.getSelectedIndex()==0){
-				this.modele.placementjoueur(x, y, Direction.HORIZONTAL);
+				this.modele.placement(x, y, Direction.HORIZONTAL,true);
 			}else{
-				this.modele.placementjoueur(x, y, Direction.VERTICAL);				
+				this.modele.placement(x, y, Direction.VERTICAL,true);				
 			}
 		}
 	}
