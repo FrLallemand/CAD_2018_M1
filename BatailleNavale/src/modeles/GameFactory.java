@@ -2,6 +2,8 @@ package modeles;
 
 import java.util.ArrayList;
 
+import DAO.ModeleDAO;
+import DAO.ModeleDAO_XML;
 import modeles.Strategie.NomsStrategies;
 import modeles.bateaux.Bateau;
 import modeles.epoques.Epoque;
@@ -82,6 +84,20 @@ public class GameFactory {
 		}
 		e.setBateauxEpoque();
 		return e;
+	}
+	
+	public static ModeleDAO getModeleDAO(String strdao,Modele m){
+		ModeleDAO mdao;
+		ModeleDAO.NomsDAO dao =ModeleDAO.NomsDAO.valueOf(strdao);
+		switch(dao) {
+		case XML:
+			mdao = new ModeleDAO_XML(m);
+			break;
+		default:
+			mdao = new ModeleDAO_XML(m);
+			break;
+		}
+		return mdao;
 	}
 	
 }

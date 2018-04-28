@@ -27,15 +27,14 @@ import modeles.StrategieChargement;
 import modeles.Terrain;
 import modeles.Terrain.StatusCase;
 
-public class ModeleDAO_XML implements ModeleDAO{
+public class ModeleDAO_XML extends ModeleDAO{
 
-	private Modele m;
 	private Document document;
 
 	public ModeleDAO_XML(Modele m){
-		this.m=m;
+		super(m);
+		nomSav=NomsDAO.XML;
 	}
-
 
 	public void sauvegarde(String file) {
 		// TODO Auto-generated method stub
@@ -177,27 +176,13 @@ public class ModeleDAO_XML implements ModeleDAO{
 			Element casesJ2=(Element)terrainJ2.getElementsByTagName("tirs").item(0);
 			NodeList listcasesJ2=casesJ2.getElementsByTagName("tir");
 			//MAJ modele
-			ArrayList<Position> fb1=chargementBateaux(listbateauxJ1);
-			ArrayList<Position> fb2=chargementBateaux(listbateauxJ2);
-			Flotte fj1=new Flotte(new ArrayList<Bateau>(),getEpoque(epoqueJ1.getTextContent()));
-			Flotte fj2=new Flotte(new ArrayList<Bateau>(),getEpoque(epoqueJ2.getTextContent()));
-			m.getTerrainJ1().setFlotte(fj1);
-			m.getTerrainJ2().setFlotte(fj2);
-			m.getTerrainJ1().resetTerrain();
-			m.getTerrainJ2().resetTerrain();
-			ArrayList<Position> tirsJ2=chargementTir(listcasesJ1);
-			ArrayList<Position> tirsJ1=chargementTir(listcasesJ2);
-			m.setStrategieJ2(new StrategieChargement(tirsJ2,fb2));
-			//partie bateaux
-			for(int x=0;x<fb1.size();x++){			
-				m.placement(fb2.get(x).getX(), fb2.get(x).getY(), fb2.get(x).getDirection(),false);
-				m.placement(fb1.get(x).getX(), fb1.get(x).getY(), fb1.get(x).getDirection(),true);
-			};
-			//partie tirs
-			for(int x=0;x<tirsJ1.size();x++){
-				m.effectuerTir(tirsJ1.get(x));				
-			}
-			m.setStrategieJ2(getStrategie(strategieJ2.getTextContent(),m.getTerrainJ2()));
+			chargementModele(chargementBateaux(listbateauxJ1),
+					chargementBateaux(listbateauxJ2),
+					chargementTir(listcasesJ1),
+					chargementTir(listcasesJ2),
+					epoqueJ1.getTextContent(),
+					epoqueJ2.getTextContent(),
+					strategieJ2.getTextContent());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -237,11 +222,5 @@ public class ModeleDAO_XML implements ModeleDAO{
 		return posTir;
 	}
 
-	private Strategie getStrategie(String strategie,Terrain tj2){
-		return GameFactory.getStrategie(strategie, tj2);
-	}
 
-	private Epoque getEpoque(String epoque){
-		return GameFactory.getEpoque(epoque);
-	}
 }

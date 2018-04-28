@@ -26,6 +26,7 @@ import Controleurs.ChargementControlleur;
 import Controleurs.NouvellePartieControleur;
 import Controleurs.PlacementControleur;
 import Controleurs.SauvegardeControlleur;
+import DAO.ModeleDAO;
 import modeles.BatailleNavale;
 import modeles.Modele;
 import modeles.Modele.GameState;
@@ -46,6 +47,7 @@ public class VuePrincipale extends JPanel implements Observer{
 	private JButton placementAleatoire;
 	private JLabel fin;
 	private JComboBox orientation;
+	private JComboBox sauvegardeType;	
 	private JLabel labelBateau;
 	private Modele modele;
 	private VueTerrain terrainJoueur, terrainTir;
@@ -65,6 +67,7 @@ public class VuePrincipale extends JPanel implements Observer{
 
         constraints.insets = new Insets(25, 25, 25, 25);
 		orientation=new JComboBox(Position.Direction.values());
+		sauvegardeType=new JComboBox(ModeleDAO.NomsDAO.values());
 
         // Terrain affichant les bateaux du joueur
 		terrainJoueur = new VueTerrain(modele, orientation);		
@@ -112,13 +115,16 @@ public class VuePrincipale extends JPanel implements Observer{
 		nouveau=new JButton("Nouveau");
 		sauvegarder=new JButton("Sauvegarder");
 		charger=new JButton("Charger");
+		sauvegardeType.setSelectedIndex(0);
 		optionInfoTop.add(nouveau);
 		optionInfoTop.add(sauvegarder);
 		optionInfoTop.add(charger);
+		optionInfoTop.add(sauvegardeType);
+		
 		
 		nouveau.addActionListener(new NouvellePartieControleur(this));
-		sauvegarder.addActionListener(new SauvegardeControlleur(this.sauvegarder,this.modele));
-		charger.addActionListener(new ChargementControlleur(this.charger,this.modele));
+		sauvegarder.addActionListener(new SauvegardeControlleur(this.sauvegarder,this.modele,this.sauvegardeType));
+		charger.addActionListener(new ChargementControlleur(this.charger,this.modele,this.sauvegardeType));
 		
         constraints.insets = new Insets(0, 0, 0, 0);
         constraints.gridx = 0;
