@@ -15,7 +15,6 @@ public class Flotte implements Iterable<Bateau>{
 	private List<Bateau> bateaux;
 	private LinkedList<Bateau> bateauxAPlacer;
 	private Epoque epoque;
-//	private int bateauxAPlacer;
 
 	public Flotte(List<Bateau> liste_origine, Epoque e) {
 		this.epoque = e;
@@ -27,15 +26,8 @@ public class Flotte implements Iterable<Bateau>{
 				bateauxAPlacer.add(epoque.getBateauxEpoque(i).get());
 			}
 		}
-		//bateauxAPlacer = bateaux.size();
 	}
-
-	// probablement inutile
-	public boolean testerTir(Position position) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	public Bateau bateauSuivantAPlacer() {
 		return bateauxAPlacer.getFirst();
 	}
