@@ -16,7 +16,7 @@ public class BatailleNavale extends Observable{
 		
 	}
 	
-	public void game(NomsEpoques epoque, NomsStrategies strategieJ2) {
+	public void game(String epoque, String strategieJ2) {
 		GameFactory factory = new GameFactory();
 		int modeTir = 0;
 		int strategieJ1 = 0;

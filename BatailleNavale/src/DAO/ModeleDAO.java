@@ -47,12 +47,12 @@ public abstract class ModeleDAO {
 		for(int x=0;x<tirsJ1.size();x++){
 			m.effectuerTir(tirsJ1.get(x));				
 		}
-		m.setStrategieJ2(getStrategie(strategie,m.getTerrainJ2()));
+		m.setStrategieJ2(getStrategie(strategie,m.getTerrainJ1(),m.getTerrainJ2()));
 	}
 	
 	
-	private Strategie getStrategie(String strategie,Terrain tj2){
-		return GameFactory.getStrategie(strategie, tj2);
+	private Strategie getStrategie(String strategie,Terrain tj1,Terrain tj2){
+		return GameFactory.getStrategie(strategie,tj1, tj2);
 	}
 
 	private Epoque getEpoque(String epoque){

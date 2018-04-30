@@ -20,12 +20,12 @@ public class OptionsControleur implements ActionListener{
 		this.modele = modele;
 	}
 	
-	public NomsEpoques getEpoque() {
-		return vue.getEpoque(vue.getEpoques().getSelection().getActionCommand());
+	public String getEpoque() {
+		return vue.getEpoques().getSelection().getActionCommand();
 	}
 	
-	public NomsStrategies getStrategie() {
-		return vue.getStrategie(vue.getStrategies().getSelection().getActionCommand());
+	public String getStrategie() {
+		return vue.getStrategies().getSelection().getActionCommand();
 	}
 
 	@Override
